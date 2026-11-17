@@ -290,7 +290,7 @@
   .game-bar { position: absolute; top: 42px; left: 12px; right: 12px; height: 6px; z-index: 8; background: rgba(255, 255, 255, .15); border-radius: 99px; overflow: hidden; display: none; }
   .gift-stage.playing .game-bar { display: block; }
   .game-bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #f43f5e, #fbbf24); transition: width 1s linear; }
-  .game-item { position: absolute; top: -44px; z-index: 6; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; animation-name: fall; animation-timing-function: linear; animation-fill-mode: forwards; }
+  .game-item { position: absolute; top: -44px; z-index: 6; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; touch-action: none; animation-name: fall; animation-timing-function: linear; animation-fill-mode: forwards; }
   .game-item.deco { opacity: .65; }
   .minus-one { position: absolute; z-index: 9; font-size: 22px; font-weight: 800; color: #f87171; text-shadow: 0 0 10px rgba(248, 113, 113, .8); pointer-events: none; animation: minusFloat .9s ease-out forwards; }
   @keyframes minusFloat { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-34px) scale(1.25); } }
@@ -797,30 +797,36 @@
     giftHint.textContent = 'Main lagi yuk ↺';
   }
 
-  giftStage.addEventListener('click', (e) => {
-    if (e.target.closest('.game-item')) {
-      if (!playing) return;
-      const it = e.target.closest('.game-item');
-      if (it.classList.contains('deco')) {
-        score = Math.max(0, score - 1);
-        gameScoreEl.textContent = '⭐ ' + score;
-        const m = document.createElement('span');
-        m.className = 'minus-one';
-        m.textContent = '-1';
-        m.style.left = it.style.left;
-        m.style.top = (it.getBoundingClientRect().top - giftStage.getBoundingClientRect().top) + 'px';
-        giftStage.appendChild(m);
-        setTimeout(() => m.remove(), 900);
-        it.classList.add('caught');
-        setTimeout(() => it.remove(), 180);
-        return;
-      }
+  function catchItem(it) {
+    if (!playing || it.classList.contains('caught')) return;
+    if (it.classList.contains('deco')) {
+      score = Math.max(0, score - 1);
+      gameScoreEl.textContent = '⭐ ' + score;
+      const m = document.createElement('span');
+      m.className = 'minus-one';
+      m.textContent = '-1';
+      m.style.left = it.style.left;
+      m.style.top = (it.getBoundingClientRect().top - giftStage.getBoundingClientRect().top) + 'px';
+      giftStage.appendChild(m);
+      setTimeout(() => m.remove(), 900);
+    } else {
       score += parseInt(it.dataset.v, 10);
       gameScoreEl.textContent = '⭐ ' + score;
-      it.classList.add('caught');
-      setTimeout(() => it.remove(), 180);
-      return;
     }
+    it.classList.add('caught');
+    setTimeout(() => it.remove(), 180);
+  }
+
+  giftStage.addEventListener('pointerdown', (e) => {
+    const it = e.target.closest('.game-item');
+    if (!it) return;
+    e.preventDefault();
+    catchItem(it);
+  });
+  giftStage.addEventListener('selectstart', (e) => e.preventDefault());
+
+  giftStage.addEventListener('click', (e) => {
+    if (e.target.closest('.game-item')) return;
     if (playing) return;
     if (giftStage.classList.contains('show-over')) { startGame(); return; }
     if (giftStage.classList.contains('show-start')) return;

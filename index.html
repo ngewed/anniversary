@@ -225,6 +225,17 @@
     0% { opacity: .9; transform: translateY(0) scale(.6); }
     100% { opacity: 0; transform: translateY(70px) scale(2.2); }
   }
+  /* Asteroid + alien di pinggir layar utama */
+  .gate-decor { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+  .gate-decor span {
+    position: absolute;
+    animation: decorFloat 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, .25));
+  }
+  @keyframes decorFloat {
+    0%, 100% { transform: translateY(0) rotate(-4deg); }
+    50% { transform: translateY(-14px) rotate(5deg); }
+  }
   /* ---------- Tombol musik melayang ---------- */
   .music-fab {
     position: fixed; right: 18px; bottom: 18px; z-index: 40;
@@ -575,6 +586,20 @@
 
   <!-- Gerbang pembuka: roket raksasa selayar -->
   <div class="gate" id="gate">
+    <div class="gate-decor" aria-hidden="true">
+      <span style="top:6%; left:4%; font-size:34px; animation-duration:5s;">🪨</span>
+      <span style="top:16%; right:5%; font-size:44px; animation-duration:6.5s; animation-delay:-2s;">👽</span>
+      <span style="top:30%; left:2%; font-size:46px; animation-duration:7s; animation-delay:-3s;">👽</span>
+      <span style="top:38%; right:3%; font-size:30px; animation-duration:5.5s; animation-delay:-1s;">🪨</span>
+      <span style="top:52%; left:6%; font-size:28px; animation-duration:6s; animation-delay:-4s;">🪨</span>
+      <span style="top:58%; right:7%; font-size:48px; animation-duration:7.5s; animation-delay:-2.5s;">👽</span>
+      <span style="top:72%; left:3%; font-size:42px; animation-duration:6.2s; animation-delay:-1.5s;">👽</span>
+      <span style="top:78%; right:4%; font-size:36px; animation-duration:5.8s; animation-delay:-3.5s;">🪨</span>
+      <span style="top:88%; left:9%; font-size:30px; animation-duration:6.8s; animation-delay:-.5s;">👽</span>
+      <span style="top:90%; right:10%; font-size:40px; animation-duration:5.2s; animation-delay:-2.8s;">🪨</span>
+      <span style="top:10%; left:22%; font-size:26px; animation-duration:7.2s; animation-delay:-4.5s;">🪨</span>
+      <span style="top:8%; right:24%; font-size:28px; animation-duration:6.4s; animation-delay:-1.2s;">👽</span>
+    </div>
     <button class="gate-rocket" id="gateBtn" type="button" aria-label="Luncurkan roket">
       <span class="rocket-body">
         <span class="rocket-emoji">🚀</span>

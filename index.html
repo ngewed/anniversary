@@ -236,6 +236,27 @@
     0%, 100% { transform: translateY(0) rotate(-4deg); }
     50% { transform: translateY(-14px) rotate(5deg); }
   }
+  /* 8 planet tata surya, berurutan di bawah layar utama */
+  .gate-planets {
+    position: absolute; left: 0; right: 0; bottom: 18px; z-index: 1;
+    display: flex; align-items: flex-end; justify-content: center; gap: 12px;
+    pointer-events: none;
+  }
+  .gate-planets .pl {
+    border-radius: 50%; flex: none;
+    animation: decorFloat 5s ease-in-out infinite;
+    box-shadow: inset -4px -4px 8px rgba(0, 0, 0, .45), 0 0 12px rgba(255, 255, 255, .12);
+  }
+  .gate-planets .pl:nth-child(odd) { animation-delay: -2s; }
+  .pl-mercury { width: 16px; height: 16px; background: radial-gradient(circle at 35% 30%, #d6c9b8, #8a7a6a 60%, #5d5348); }
+  .pl-venus { width: 26px; height: 26px; background: radial-gradient(circle at 35% 30%, #f7e3ac, #e0b95c 60%, #a67c2e); }
+  .pl-earth { width: 28px; height: 28px; background: radial-gradient(circle at 35% 30%, #7dd3fc, #2563eb 55%, #1e40af); box-shadow: inset -4px -4px 8px rgba(0, 0, 0, .45), 0 0 14px rgba(59, 130, 246, .5); }
+  .pl-mars { width: 22px; height: 22px; background: radial-gradient(circle at 35% 30%, #fca5a5, #c1440e 60%, #7c2d12); }
+  .pl-jupiter { width: 52px; height: 52px; background: radial-gradient(circle at 35% 30%, #fde68a, #d8a86a 45%, #a16207 75%, #92400e); }
+  .pl-saturn { width: 46px; height: 46px; position: relative; background: radial-gradient(circle at 35% 30%, #fef3c7, #e3cfa3 60%, #a68b5b); }
+  .pl-saturn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 78px; height: 20px; transform: translate(-50%, -50%) rotate(-18deg); border: 3px solid rgba(253, 230, 138, .85); border-radius: 50%; }
+  .pl-uranus { width: 36px; height: 36px; background: radial-gradient(circle at 35% 30%, #cffafe, #67e8f9 55%, #0e7490); }
+  .pl-neptune { width: 34px; height: 34px; background: radial-gradient(circle at 35% 30%, #93c5fd, #3b82f6 55%, #1e3a8a); }
   /* ---------- Tombol musik melayang ---------- */
   .music-fab {
     position: fixed; right: 18px; bottom: 18px; z-index: 40;
@@ -599,6 +620,16 @@
       <span style="top:90%; right:10%; font-size:40px; animation-duration:5.2s; animation-delay:-2.8s;">🪨</span>
       <span style="top:10%; left:22%; font-size:26px; animation-duration:7.2s; animation-delay:-4.5s;">🪨</span>
       <span style="top:8%; right:24%; font-size:28px; animation-duration:6.4s; animation-delay:-1.2s;">👽</span>
+    </div>
+    <div class="gate-planets" aria-hidden="true">
+      <span class="pl pl-mercury"></span>
+      <span class="pl pl-venus"></span>
+      <span class="pl pl-earth"></span>
+      <span class="pl pl-mars"></span>
+      <span class="pl pl-jupiter"></span>
+      <span class="pl pl-saturn"></span>
+      <span class="pl pl-uranus"></span>
+      <span class="pl pl-neptune"></span>
     </div>
     <button class="gate-rocket" id="gateBtn" type="button" aria-label="Luncurkan roket">
       <span class="rocket-body">

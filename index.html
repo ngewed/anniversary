@@ -303,6 +303,23 @@
   .game-guide { text-align: center; color: #e9e6ff; font-size: 15px; line-height: 1.9; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); border-radius: 16px; padding: 16px 20px; }
   .game-taunt { font-size: 19px; font-weight: 900; color: #fb7185; letter-spacing: .04em; margin-bottom: 4px; text-shadow: 0 0 14px rgba(251, 113, 133, .5); }
   .game-guide-title { font-size: 17px; font-weight: 800; color: #fcd34d; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
+  .game-over { overflow-y: auto; }
+  .prize-wrap { width: 100%; margin-top: 12px; }
+  .prize-title { font-size: 16px; font-weight: 800; color: #fcd34d; margin-bottom: 8px; }
+  .prize-row { display: flex; gap: 10px; justify-content: center; }
+  .game-over .prize-box { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .16); border-radius: 14px; padding: 10px 4px 8px; color: #e9e6ff; font-family: inherit; font-size: 13px; font-weight: 400; cursor: pointer; position: relative; box-shadow: none; transition: transform .15s ease, border-color .15s ease, opacity .2s ease; }
+  .prize-emoji { font-size: 34px; line-height: 1; }
+  .prize-name { font-size: 13px; font-weight: 800; }
+  .prize-range { font-size: 11px; opacity: .75; }
+  .prize-lock { position: absolute; top: 6px; right: 6px; font-size: 13px; }
+  .game-over .prize-box.locked { opacity: .45; filter: grayscale(.7); cursor: not-allowed; }
+  .game-over .prize-box.openable { border-color: #fcd34d; box-shadow: 0 0 16px rgba(252, 211, 77, .45); animation: prizeGlow 1.2s ease-in-out infinite; }
+  .game-over .prize-box.openable .prize-lock { display: none; }
+  .game-over .prize-box.opened { border-color: #34d399; }
+  @keyframes prizeGlow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+  .game-over .prize-box.shake { animation: shake .3s ease; }
+  @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+  .prize-result { min-height: 20px; font-size: 14px; margin-top: 10px; color: #fda4af; line-height: 1.5; }
   .game-start button, .game-over button { padding: 14px 30px; border-radius: 999px; border: none; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #f43f5e, #8b5cf6); box-shadow: 0 8px 24px rgba(244, 63, 94, .5); cursor: pointer; }
   .game-score-big { font-size: 58px; font-weight: 800; background: linear-gradient(92deg, #fda4af, #fbbf24, #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .game-over p { font-size: 16px; color: #e9e6ff; text-align: center; padding: 0 22px; line-height: 1.6; }
@@ -589,6 +606,15 @@
           <div class="game-score-big" id="gameScoreBig">0</div>
           <p id="gameTier"></p>
           <p class="game-small">Hadiah kecil untuk 2 tahun kita &#10084;</p>
+          <div class="prize-wrap" id="prizeWrap">
+            <div class="prize-title">&#127873; Pilih hadiahmu</div>
+            <div class="prize-row">
+              <button class="prize-box" data-tier="1" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 1</span><span class="prize-range">skor 10&ndash;30</span><span class="prize-lock">&#128274;</span></button>
+              <button class="prize-box" data-tier="2" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 2</span><span class="prize-range">skor 31&ndash;40</span><span class="prize-lock">&#128274;</span></button>
+              <button class="prize-box" data-tier="3" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 3</span><span class="prize-range">skor 40+</span><span class="prize-lock">&#128274;</span></button>
+            </div>
+            <div class="prize-result" id="prizeResult"></div>
+          </div>
           <button id="gameAgainBtn">&#8635; Main lagi</button>
         </div>
         <div class="gift-box" id="giftBox">
@@ -706,6 +732,7 @@
   const gameBarEl = document.getElementById('gameBarFill');
   const gameScoreBig = document.getElementById('gameScoreBig');
   const gameTier = document.getElementById('gameTier');
+  const prizeResult = document.getElementById('prizeResult');
   let giftTimer = null, spawnTimer = null, tickTimer = null;
   let score = 0, timeLeft = 30, playing = false, spedUp = false;
 
@@ -754,6 +781,16 @@
     giftStage.classList.remove('playing');
     gameScoreBig.textContent = score;
     gameTier.textContent = score >= 35 ? 'WOW! Master semesta! 🚀' : score >= 20 ? 'Hebat banget! Kamu penangkap bintang andal ✦' : score >= 10 ? 'Lumayan! Semesta tersenyum sama kamu ♥' : 'Santai… coba lagi, pasti bisa! ♥';
+    const prizeTier = score >= 40 ? 3 : score >= 31 ? 2 : score >= 10 ? 1 : 0;
+    prizeResult.textContent = '';
+    prizeResult.style.color = '#fda4af';
+    document.querySelectorAll('.prize-box').forEach(box => {
+      const t = parseInt(box.dataset.tier, 10);
+      box.classList.remove('locked', 'openable', 'opened', 'shake');
+      box.querySelector('.prize-emoji').textContent = '🎁';
+      if (t === prizeTier) box.classList.add('openable');
+      else box.classList.add('locked');
+    });
     giftStage.classList.add('show-over');
     giftHint.textContent = 'Main lagi yuk ↺';
   }
@@ -800,6 +837,24 @@
 
   document.getElementById('gameStartBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
   document.getElementById('gameAgainBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
+  document.querySelectorAll('.prize-box').forEach(box => {
+    box.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (box.classList.contains('opened')) return;
+      if (box.classList.contains('locked')) {
+        box.classList.remove('shake');
+        void box.offsetWidth;
+        box.classList.add('shake');
+        prizeResult.textContent = 'Kotak ini butuh skor ' + box.querySelector('.prize-range').textContent.replace('skor ', '') + ' — skor kamu ' + score + '. Coba lagi ya! ♥';
+        return;
+      }
+      box.classList.remove('openable');
+      box.classList.add('opened');
+      box.querySelector('.prize-emoji').textContent = '🎉';
+      prizeResult.style.color = '#fcd34d';
+      prizeResult.textContent = 'Kotak ' + box.dataset.tier + ' terbuka! 🎉 Isi hadiahnya masih rahasia — nanti diisi ya ♥';
+    });
+  });
 
   // Surat mengetik sendiri saat terlihat
   const letterFull = "Sayang, di antara miliaran bintang, aku bersyukur semesta mempertemukan kita. Terima kasih untuk semua tawa, semua sabar, dan semua hari yang kamu buat lebih hangat. Hari ini, dan seterusnya — aku di sini, menemanimu mengelilingi semesta. ♥";

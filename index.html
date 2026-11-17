@@ -284,13 +284,13 @@
   .gift-stage.launched .gift-glow { opacity: 1; transform: translate(-50%, 0) scale(1.4); }
   .gift-hint { margin-top: 14px; font-size: 14px; color: #c7c3f5; letter-spacing: .06em; }
   /* Mini game tangkap bintang */
-  .gift-stage { touch-action: manipulation; }
+  .gift-stage { touch-action: manipulation; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; }
   .game-hud { position: absolute; top: 10px; left: 12px; right: 12px; z-index: 8; display: none; justify-content: space-between; font-weight: 800; font-size: 18px; color: #fff; text-shadow: 0 0 10px rgba(0, 0, 0, .65); }
   .gift-stage.playing .game-hud { display: flex; }
   .game-bar { position: absolute; top: 42px; left: 12px; right: 12px; height: 6px; z-index: 8; background: rgba(255, 255, 255, .15); border-radius: 99px; overflow: hidden; display: none; }
   .gift-stage.playing .game-bar { display: block; }
   .game-bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #f43f5e, #fbbf24); transition: width 1s linear; }
-  .game-item { position: absolute; top: -44px; z-index: 6; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; animation-name: fall; animation-timing-function: linear; animation-fill-mode: forwards; }
+  .game-item { position: absolute; top: -44px; z-index: 6; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; animation-name: fall; animation-timing-function: linear; animation-fill-mode: forwards; }
   .game-item.deco { opacity: .65; }
   .minus-one { position: absolute; z-index: 9; font-size: 22px; font-weight: 800; color: #f87171; text-shadow: 0 0 10px rgba(248, 113, 113, .8); pointer-events: none; animation: minusFloat .9s ease-out forwards; }
   @keyframes minusFloat { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-34px) scale(1.25); } }
@@ -839,6 +839,7 @@
 
   document.getElementById('gameStartBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
   document.getElementById('gameAgainBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
+  giftStage.addEventListener('contextmenu', (e) => e.preventDefault());
   document.querySelectorAll('.prize-box').forEach(box => {
     box.addEventListener('click', (e) => {
       e.stopPropagation();

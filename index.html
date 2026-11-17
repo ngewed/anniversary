@@ -320,6 +320,8 @@
   .game-over .prize-box.shake { animation: shake .3s ease; }
   @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
   .prize-result { min-height: 20px; font-size: 14px; margin-top: 10px; color: #fda4af; line-height: 1.5; }
+  .prize-result.revealed { font-size: 18px; font-weight: 800; color: #fcd34d; }
+  .prize-sub { font-size: 13px; font-weight: 400; color: #e9e6ff; }
   .game-start button, .game-over button { padding: 14px 30px; border-radius: 999px; border: none; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #f43f5e, #8b5cf6); box-shadow: 0 8px 24px rgba(244, 63, 94, .5); cursor: pointer; }
   .game-score-big { font-size: 58px; font-weight: 800; background: linear-gradient(92deg, #fda4af, #fbbf24, #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .game-over p { font-size: 16px; color: #e9e6ff; text-align: center; padding: 0 22px; line-height: 1.6; }
@@ -786,6 +788,7 @@
     const prizeTier = score >= 60 ? 3 : score >= 45 ? 2 : score >= 30 ? 1 : 0;
     prizeResult.textContent = '';
     prizeResult.style.color = '#fda4af';
+    prizeResult.classList.remove('revealed');
     document.querySelectorAll('.prize-box').forEach(box => {
       const t = parseInt(box.dataset.tier, 10);
       box.classList.remove('locked', 'openable', 'opened', 'shake');
@@ -846,6 +849,11 @@
   document.getElementById('gameStartBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
   document.getElementById('gameAgainBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
   giftStage.addEventListener('contextmenu', (e) => e.preventDefault());
+  const PRIZES = {
+    1: { title: 'VOUCHER Rp100.000', sub: 'Selamat! Hadiahmu sudah menanti ♥' },
+    2: { title: 'VOUCHER Rp200.000', sub: 'Selamat! Hadiahmu sudah menanti ♥' },
+    3: { title: 'MYSTERY BOX — SOON', sub: 'Isinya masih rahasia, tunggu kejutan berikutnya ♥' },
+  };
   document.querySelectorAll('.prize-box').forEach(box => {
     box.addEventListener('click', (e) => {
       e.stopPropagation();
@@ -860,8 +868,9 @@
       box.classList.remove('openable');
       box.classList.add('opened');
       box.querySelector('.prize-emoji').textContent = '🎉';
-      prizeResult.style.color = '#fcd34d';
-      prizeResult.textContent = 'Kotak ' + box.dataset.tier + ' terbuka! 🎉 Isi hadiahnya masih rahasia — nanti diisi ya ♥';
+      const prize = PRIZES[box.dataset.tier];
+      prizeResult.classList.add('revealed');
+      prizeResult.innerHTML = '🎉 ' + prize.title + ' 🎉<br><span class="prize-sub">' + prize.sub + '</span>';
     });
   });
 

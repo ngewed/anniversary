@@ -257,6 +257,18 @@
   .pl-saturn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 78px; height: 20px; transform: translate(-50%, -50%) rotate(-18deg); border: 3px solid rgba(253, 230, 138, .85); border-radius: 50%; }
   .pl-uranus { width: 36px; height: 36px; background: radial-gradient(circle at 35% 30%, #cffafe, #67e8f9 55%, #0e7490); }
   .pl-neptune { width: 34px; height: 34px; background: radial-gradient(circle at 35% 30%, #93c5fd, #3b82f6 55%, #1e3a8a); }
+  /* Satelit + pesawat alien di atas deretan planet */
+  .gate-sky {
+    position: absolute; left: 0; right: 0; bottom: 88px; z-index: 1;
+    display: flex; align-items: center; justify-content: center; gap: 18px;
+    padding: 0 16px; pointer-events: none;
+  }
+  .gate-sky span {
+    display: block;
+    animation: decorFloat 6s ease-in-out infinite;
+    filter: drop-shadow(0 0 10px rgba(125, 211, 252, .5));
+  }
+  .gate-sky span:nth-child(even) { animation-delay: -3s; }
   /* ---------- Tombol musik melayang ---------- */
   .music-fab {
     position: fixed; right: 18px; bottom: 18px; z-index: 40;
@@ -630,6 +642,14 @@
       <span class="pl pl-saturn"></span>
       <span class="pl pl-uranus"></span>
       <span class="pl pl-neptune"></span>
+    </div>
+    <div class="gate-sky" aria-hidden="true">
+      <span style="font-size:36px; animation-duration:6s;">🛰️</span>
+      <span style="font-size:44px; animation-duration:7s;">🛸</span>
+      <span style="font-size:32px; animation-duration:5.5s;">🛰️</span>
+      <span style="font-size:46px; animation-duration:6.8s;">🛸</span>
+      <span style="font-size:38px; animation-duration:6.2s;">🛰️</span>
+      <span style="font-size:42px; animation-duration:7.4s;">🛸</span>
     </div>
     <button class="gate-rocket" id="gateBtn" type="button" aria-label="Luncurkan roket">
       <span class="rocket-body">

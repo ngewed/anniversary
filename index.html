@@ -162,29 +162,57 @@
   /* ---------- Gerbang pembuka ---------- */
   .gate {
     position: fixed; inset: 0; z-index: 50;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 18px; padding: 24px; text-align: center;
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; cursor: pointer;
     background: radial-gradient(ellipse at 50% 40%, rgba(76, 29, 149, .55), rgba(4, 4, 15, .92) 75%);
     backdrop-filter: blur(4px);
     transition: opacity .9s ease;
   }
   .gate.hidden { opacity: 0; pointer-events: none; }
-  .gate .gate-star { font-size: 54px; color: #fcd34d; text-shadow: 0 0 26px rgba(253, 211, 77, .9); animation: twinkle 2.2s ease-in-out infinite; }
-  .gate h2 { font-size: 26px; font-weight: 800; letter-spacing: .04em; }
-  .gate p { color: #c7c3f5; font-size: 15px; line-height: 1.7; max-width: 320px; }
-  .gate-btn {
-    margin-top: 8px; border: none; cursor: pointer;
-    padding: 18px 36px; border-radius: 999px;
-    font-size: 18px; font-weight: 800; color: #fff; letter-spacing: .03em;
-    background: linear-gradient(135deg, #f43f5e, #8b5cf6);
-    box-shadow: 0 10px 34px rgba(244, 63, 94, .55), 0 0 0 4px rgba(255,255,255,.08);
-    animation: btnPulse 1.8s ease-in-out infinite;
+  /* Kado raksasa selayar, dibungkus pita — tanpa tulisan */
+  .gate-gift {
+    position: relative; display: block; border: none; background: none; padding: 0;
+    width: min(86vw, 360px); height: min(62vh, 460px); cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    animation: gateBob 2.2s ease-in-out infinite;
+    transition: transform .5s ease;
   }
-  .gate-btn small { display: block; font-size: 12px; font-weight: 500; opacity: .85; margin-top: 3px; }
-  @keyframes btnPulse {
-    0%, 100% { transform: scale(1); box-shadow: 0 10px 34px rgba(244, 63, 94, .55), 0 0 0 4px rgba(255,255,255,.08); }
-    50% { transform: scale(1.05); box-shadow: 0 10px 44px rgba(244, 63, 94, .75), 0 0 0 8px rgba(255,255,255,.04); }
+  @keyframes gateBob {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-10px) scale(1.02); }
   }
+  .gate-gift-glow {
+    position: absolute; left: 50%; top: 50%; z-index: 0;
+    width: 340px; height: 340px; transform: translate(-50%, -50%) scale(.5);
+    background: radial-gradient(circle, rgba(253, 211, 77, .8), rgba(244, 63, 94, .35) 45%, transparent 70%);
+    border-radius: 50%; opacity: 0; pointer-events: none;
+    transition: opacity .5s ease, transform .8s ease;
+  }
+  .gate-gift-body {
+    position: absolute; left: 0; right: 0; top: 52px; bottom: 0; z-index: 1;
+    background: linear-gradient(180deg, #fb7185, #be123c);
+    border-radius: 16px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); overflow: hidden;
+  }
+  .gate-gift-body::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 46px; transform: translateX(-50%); background: linear-gradient(180deg, #fde68a, #f59e0b); }
+  .gate-gift-body::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 46px; transform: translateY(-50%); background: linear-gradient(90deg, #fde68a, #f59e0b); }
+  .gate-gift-lid {
+    position: absolute; left: -12px; right: -12px; top: 0; height: 56px; z-index: 2;
+    background: linear-gradient(180deg, #f43f5e, #9f1239);
+    border-radius: 10px; box-shadow: 0 10px 24px rgba(0, 0, 0, .45);
+    transition: transform .55s ease, opacity .55s ease;
+  }
+  .gate-gift-lid::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 46px; transform: translateX(-50%); background: linear-gradient(180deg, #fde68a, #f59e0b); }
+  .gate-gift-bow { position: absolute; left: 50%; top: -28px; transform: translateX(-50%); width: 124px; height: 58px; }
+  .gate-gift-bow::before, .gate-gift-bow::after {
+    content: ""; position: absolute; top: 0; width: 60px; height: 50px;
+    border: 5px solid #fbbf24; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    background: rgba(251, 191, 36, .25);
+  }
+  .gate-gift-bow::before { left: 0; transform: rotate(-24deg); }
+  .gate-gift-bow::after { right: 0; transform: rotate(24deg); }
+  .gate.opening .gate-gift { animation: none; transform: scale(1.07); }
+  .gate.opening .gate-gift-lid { transform: translateY(-110px) rotate(-16deg); opacity: 0; }
+  .gate.opening .gate-gift-glow { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
   /* ---------- Tombol musik melayang ---------- */
   .music-fab {
     position: fixed; right: 18px; bottom: 18px; z-index: 40;
@@ -533,12 +561,13 @@
   <div class="astronaut">🧑‍🚀</div>
   <div class="satellite">🛰️</div>
 
-  <!-- Gerbang pembuka -->
+  <!-- Gerbang pembuka: kado raksasa selayar, dibungkus pita -->
   <div class="gate" id="gate">
-    <div class="gate-star">✦</div>
-    <h2>Psst… ada kejutan untukmu</h2>
-    <p>Aku sudah menyiapkan satu sudut kecil semesta, khusus buat kita berdua. Siap-siap ya — ketuk tombolnya, dan biarkan semesta yang bercerita.</p>
-    <button class="gate-btn" id="gateBtn">🎁&nbsp; Buka Kejutannya<small>lagu kita langsung muter</small></button>
+    <button class="gate-gift" id="gateBtn" type="button" aria-label="Buka hadiah">
+      <span class="gate-gift-glow"></span>
+      <span class="gate-gift-body"></span>
+      <span class="gate-gift-lid"><span class="gate-gift-bow"></span></span>
+    </button>
   </div>
 
   <button class="music-fab" id="musicFab" aria-label="Putar atau jeda lagu">♪</button>
@@ -718,13 +747,18 @@
   // Coba putar otomatis saat halaman dibuka (browser biasanya menolak sampai ada interaksi)
   bgm.play().catch(() => {});
 
-  // Gerbang pembuka: ketukan pertama memulai musik
+  // Gerbang pembuka: ketuk kado -> tutup terlepas, musik mulai
   const gate = document.getElementById('gate');
-  document.getElementById('gateBtn').addEventListener('click', () => {
-    gate.classList.add('hidden');
+  let gateOpened = false;
+  const openGate = () => {
+    if (gateOpened) return; gateOpened = true;
+    gate.classList.add('opening');
     bgm.play().catch(() => {});
-    setTimeout(() => gate.remove(), 1000);
-  });
+    setTimeout(() => gate.classList.add('hidden'), 450);
+    setTimeout(() => gate.remove(), 1400);
+  };
+  document.getElementById('gateBtn').addEventListener('click', (e) => { e.stopPropagation(); openGate(); });
+  gate.addEventListener('click', openGate);
 
   // Kotak hadiah: ketuk -> roket meluncur mengikuti pita -> mini game
   const giftStage = document.getElementById('giftStage');

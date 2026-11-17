@@ -609,9 +609,9 @@
           <div class="prize-wrap" id="prizeWrap">
             <div class="prize-title">&#127873; Pilih hadiahmu</div>
             <div class="prize-row">
-              <button class="prize-box" data-tier="1" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 1</span><span class="prize-range">skor 10&ndash;30</span><span class="prize-lock">&#128274;</span></button>
-              <button class="prize-box" data-tier="2" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 2</span><span class="prize-range">skor 31&ndash;40</span><span class="prize-lock">&#128274;</span></button>
-              <button class="prize-box" data-tier="3" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 3</span><span class="prize-range">skor 40+</span><span class="prize-lock">&#128274;</span></button>
+              <button class="prize-box" data-tier="1" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 1</span><span class="prize-range">skor 30&ndash;40</span><span class="prize-lock">&#128274;</span></button>
+              <button class="prize-box" data-tier="2" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 2</span><span class="prize-range">skor 40&ndash;50</span><span class="prize-lock">&#128274;</span></button>
+              <button class="prize-box" data-tier="3" type="button"><span class="prize-emoji">&#127873;</span><span class="prize-name">Kotak 3</span><span class="prize-range">skor 50+</span><span class="prize-lock">&#128274;</span></button>
             </div>
             <div class="prize-result" id="prizeResult"></div>
           </div>
@@ -781,7 +781,7 @@
     giftStage.classList.remove('playing');
     gameScoreBig.textContent = score;
     gameTier.textContent = score >= 35 ? 'WOW! Master semesta! 🚀' : score >= 20 ? 'Hebat banget! Kamu penangkap bintang andal ✦' : score >= 10 ? 'Lumayan! Semesta tersenyum sama kamu ♥' : 'Santai… coba lagi, pasti bisa! ♥';
-    const prizeTier = score >= 40 ? 3 : score >= 31 ? 2 : score >= 10 ? 1 : 0;
+    const prizeTier = score >= 50 ? 3 : score >= 40 ? 2 : score >= 30 ? 1 : 0;
     prizeResult.textContent = '';
     prizeResult.style.color = '#fda4af';
     document.querySelectorAll('.prize-box').forEach(box => {

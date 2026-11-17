@@ -262,9 +262,10 @@
   .gift-ribbon { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
   .gift-ribbon path { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 3.2s linear; filter: drop-shadow(0 0 8px rgba(251, 191, 36, .45)); }
   .gift-stage.launched .gift-ribbon path { stroke-dashoffset: 0; }
-  .rocket-fly { position: absolute; left: 0; top: 0; width: 46px; height: 46px; font-size: 42px; line-height: 1; z-index: 5; pointer-events: none; opacity: 0; offset-path: path('M180 292 C 115 245, 60 255, 78 195 C 96 135, 262 165, 252 105 C 244 55, 150 65, 168 28'); offset-anchor: center; offset-rotate: auto; filter: drop-shadow(0 0 12px rgba(251, 146, 60, .6)); }
+  .rocket-fly { position: absolute; left: 0; top: 0; width: 46px; height: 46px; font-size: 42px; line-height: 1; z-index: 5; pointer-events: none; opacity: 1; animation: rocketIdle 2.4s ease-in-out infinite; offset-path: path('M180 292 C 115 245, 60 255, 78 195 C 96 135, 262 165, 252 105 C 244 55, 150 65, 168 28'); offset-anchor: center; offset-rotate: auto; filter: drop-shadow(0 0 12px rgba(251, 146, 60, .6)); }
   .gift-stage.launched .rocket-fly { opacity: 1; animation: flyAlong 3.2s ease-in-out forwards; }
   @keyframes flyAlong { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+  @keyframes rocketIdle { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-7px) rotate(2deg); } }
   @supports not (offset-path: path('M0 0')) {
     .gift-stage.launched .rocket-fly { animation: flyFallback 3.2s ease-in-out forwards; }
     @keyframes flyFallback { from { transform: translate(157px, 269px); } to { transform: translate(145px, 5px); } }

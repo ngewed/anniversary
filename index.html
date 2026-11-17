@@ -169,50 +169,62 @@
     transition: opacity .9s ease;
   }
   .gate.hidden { opacity: 0; pointer-events: none; }
-  /* Kado raksasa selayar, dibungkus pita — tanpa tulisan */
-  .gate-gift {
-    position: relative; display: block; border: none; background: none; padding: 0;
-    width: min(86vw, 360px); height: min(62vh, 460px); cursor: pointer;
+  /* Roket raksasa selayar — diketuk, meluncur lurus ke atas seperti roket asli */
+  .gate-rocket {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    border: none; background: none; padding: 0;
+    width: min(80vw, 320px); height: min(60vh, 430px); cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    animation: gateBob 2.2s ease-in-out infinite;
-    transition: transform .5s ease;
+    animation: rocketBob 2s ease-in-out infinite;
   }
-  @keyframes gateBob {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-10px) scale(1.02); }
+  @keyframes rocketBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
   }
-  .gate-gift-glow {
-    position: absolute; left: 50%; top: 50%; z-index: 0;
-    width: 340px; height: 340px; transform: translate(-50%, -50%) scale(.5);
-    background: radial-gradient(circle, rgba(253, 211, 77, .8), rgba(244, 63, 94, .35) 45%, transparent 70%);
-    border-radius: 50%; opacity: 0; pointer-events: none;
-    transition: opacity .5s ease, transform .8s ease;
+  .rocket-body {
+    display: flex; flex-direction: column; align-items: center;
+    transform: rotate(-45deg);
+    filter: drop-shadow(0 0 26px rgba(251, 146, 60, .55));
   }
-  .gate-gift-body {
-    position: absolute; left: 0; right: 0; top: 52px; bottom: 0; z-index: 1;
-    background: linear-gradient(180deg, #fb7185, #be123c);
-    border-radius: 16px; box-shadow: 0 24px 60px rgba(0, 0, 0, .55); overflow: hidden;
+  .rocket-emoji { font-size: min(44vw, 190px); line-height: 1; display: block; }
+  .rocket-flame {
+    width: 44px; height: 58px; margin-top: -6px;
+    background: radial-gradient(circle at 50% 18%, #fef9c3, #fbbf24 35%, #f97316 62%, #ef4444 100%);
+    border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+    filter: drop-shadow(0 0 18px rgba(249, 115, 22, .8));
+    transform-origin: top center;
+    animation: flameFlicker .28s ease-in-out infinite alternate;
+    transition: transform .3s ease;
   }
-  .gate-gift-body::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 46px; transform: translateX(-50%); background: linear-gradient(180deg, #fde68a, #f59e0b); }
-  .gate-gift-body::after { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 46px; transform: translateY(-50%); background: linear-gradient(90deg, #fde68a, #f59e0b); }
-  .gate-gift-lid {
-    position: absolute; left: -12px; right: -12px; top: 0; height: 56px; z-index: 2;
-    background: linear-gradient(180deg, #f43f5e, #9f1239);
-    border-radius: 10px; box-shadow: 0 10px 24px rgba(0, 0, 0, .45);
-    transition: transform .55s ease, opacity .55s ease;
+  @keyframes flameFlicker { from { transform: scale(1, 1); } to { transform: scale(1.12, 1.28); } }
+  .smoke-puff {
+    position: absolute; top: 72%; left: 50%; z-index: 0;
+    width: 70px; height: 70px; margin-left: -35px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, .85), rgba(255, 255, 255, 0) 70%);
+    opacity: 0; pointer-events: none;
   }
-  .gate-gift-lid::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 46px; transform: translateX(-50%); background: linear-gradient(180deg, #fde68a, #f59e0b); }
-  .gate-gift-bow { position: absolute; left: 50%; top: -28px; transform: translateX(-50%); width: 124px; height: 58px; }
-  .gate-gift-bow::before, .gate-gift-bow::after {
-    content: ""; position: absolute; top: 0; width: 60px; height: 50px;
-    border: 5px solid #fbbf24; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-    background: rgba(251, 191, 36, .25);
+  .gate.launching { animation: gateShake .3s linear; }
+  @keyframes gateShake {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(2px, -1px); }
+    75% { transform: translate(-2px, 1px); }
   }
-  .gate-gift-bow::before { left: 0; transform: rotate(-24deg); }
-  .gate-gift-bow::after { right: 0; transform: rotate(24deg); }
-  .gate.opening .gate-gift { animation: none; transform: scale(1.07); }
-  .gate.opening .gate-gift-lid { transform: translateY(-110px) rotate(-16deg); opacity: 0; }
-  .gate.opening .gate-gift-glow { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
+  .gate.launching .gate-rocket { animation: rocketLaunch 1.15s cubic-bezier(.55, 0, .85, .36) forwards; }
+  @keyframes rocketLaunch {
+    0% { transform: translateY(0); }
+    6% { transform: translate(3px, 2px); }
+    12% { transform: translate(-3px, 1px); }
+    18% { transform: translate(2px, -2px); }
+    100% { transform: translateY(-130vh); }
+  }
+  .gate.launching .rocket-flame { animation-duration: .12s; transform: scale(1.5, 2.1); }
+  .gate.launching .smoke-puff { animation: smokeRise 1s ease-out forwards; }
+  .gate.launching .smoke-puff.s2 { animation-delay: .12s; margin-left: -72px; }
+  .gate.launching .smoke-puff.s3 { animation-delay: .22s; margin-left: 4px; }
+  @keyframes smokeRise {
+    0% { opacity: .9; transform: translateY(0) scale(.6); }
+    100% { opacity: 0; transform: translateY(70px) scale(2.2); }
+  }
   /* ---------- Tombol musik melayang ---------- */
   .music-fab {
     position: fixed; right: 18px; bottom: 18px; z-index: 40;
@@ -561,12 +573,16 @@
   <div class="astronaut">🧑‍🚀</div>
   <div class="satellite">🛰️</div>
 
-  <!-- Gerbang pembuka: kado raksasa selayar, dibungkus pita -->
+  <!-- Gerbang pembuka: roket raksasa selayar -->
   <div class="gate" id="gate">
-    <button class="gate-gift" id="gateBtn" type="button" aria-label="Buka hadiah">
-      <span class="gate-gift-glow"></span>
-      <span class="gate-gift-body"></span>
-      <span class="gate-gift-lid"><span class="gate-gift-bow"></span></span>
+    <button class="gate-rocket" id="gateBtn" type="button" aria-label="Luncurkan roket">
+      <span class="rocket-body">
+        <span class="rocket-emoji">🚀</span>
+        <span class="rocket-flame"></span>
+      </span>
+      <span class="smoke-puff s1"></span>
+      <span class="smoke-puff s2"></span>
+      <span class="smoke-puff s3"></span>
     </button>
   </div>
 
@@ -747,15 +763,15 @@
   // Coba putar otomatis saat halaman dibuka (browser biasanya menolak sampai ada interaksi)
   bgm.play().catch(() => {});
 
-  // Gerbang pembuka: ketuk kado -> tutup terlepas, musik mulai
+  // Gerbang pembuka: ketuk roket -> meluncur ke atas, musik mulai
   const gate = document.getElementById('gate');
   let gateOpened = false;
   const openGate = () => {
     if (gateOpened) return; gateOpened = true;
-    gate.classList.add('opening');
+    gate.classList.add('launching');
     bgm.play().catch(() => {});
-    setTimeout(() => gate.classList.add('hidden'), 450);
-    setTimeout(() => gate.remove(), 1400);
+    setTimeout(() => gate.classList.add('hidden'), 900);
+    setTimeout(() => gate.remove(), 1800);
   };
   document.getElementById('gateBtn').addEventListener('click', (e) => { e.stopPropagation(); openGate(); });
   gate.addEventListener('click', openGate);

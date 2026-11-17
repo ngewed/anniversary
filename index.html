@@ -752,8 +752,8 @@
     it.style.left = (8 + Math.random() * 300) + 'px';
     it.style.fontSize = (26 + Math.random() * 14) + 'px';
     const elapsed = 30 - timeLeft;
-    const baseDur = 3.6 - elapsed * 0.06;
-    it.style.animationDuration = (baseDur + Math.random() * 0.6) + 's';
+    const baseDur = 2.6 - elapsed * 0.047;
+    it.style.animationDuration = (baseDur + Math.random() * 0.4) + 's';
     it.addEventListener('animationend', () => it.remove());
     giftStage.appendChild(it);
   }

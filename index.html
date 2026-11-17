@@ -291,6 +291,7 @@
   .gift-stage.playing .game-bar { display: block; }
   .game-bar i { display: block; height: 100%; width: 100%; background: linear-gradient(90deg, #f43f5e, #fbbf24); transition: width 1s linear; }
   .game-item { position: absolute; top: -44px; z-index: 6; cursor: pointer; user-select: none; -webkit-tap-highlight-color: transparent; touch-action: manipulation; animation-name: fall; animation-timing-function: linear; animation-fill-mode: forwards; }
+  .game-item.deco { opacity: .65; }
   @keyframes fall { to { transform: translateY(480px) rotate(40deg); } }
   .game-item.caught { animation-name: pop; animation-duration: .18s; animation-timing-function: ease-out; }
   @keyframes pop { to { transform: scale(1.9); opacity: 0; } }
@@ -697,15 +698,15 @@
 
   function spawnItem() {
     const r = Math.random();
-    let emoji = '⭐', v = 1;
-    if (r < 0.08) { emoji = '☄️'; v = 5; }
-    else if (r < 0.22) { emoji = '♥'; v = 3; }
-    else if (r < 0.45) { emoji = '🪐'; v = 2; }
-    else if (r < 0.6) { emoji = '✦'; v = 1; }
+    let emoji = '⭐', v = 1, deco = false;
+    if (r < 0.12) { emoji = '🪐'; deco = true; }
+    else if (r < 0.2) { emoji = '☄️'; deco = true; }
+    else if (r < 0.38) { emoji = '♥'; v = 3; }
+    else if (r < 0.55) { emoji = '✦'; v = 1; }
     const it = document.createElement('span');
-    it.className = 'game-item';
+    it.className = 'game-item' + (deco ? ' deco' : '');
     it.textContent = emoji;
-    it.dataset.v = v;
+    if (!deco) it.dataset.v = v;
     it.style.left = (8 + Math.random() * 300) + 'px';
     it.style.fontSize = (26 + Math.random() * 14) + 'px';
     it.style.animationDuration = (2.6 + Math.random() * 1.6) + 's';
@@ -737,7 +738,7 @@
     clearField();
     giftStage.classList.remove('playing');
     gameScoreBig.textContent = score;
-    gameTier.textContent = score >= 40 ? 'WOW! Master semesta! 🚀' : score >= 25 ? 'Hebat banget! Kamu penangkap bintang andal ✦' : score >= 12 ? 'Lumayan! Semesta tersenyum sama kamu ♥' : 'Santai… coba lagi, pasti bisa! ♥';
+    gameTier.textContent = score >= 35 ? 'WOW! Master semesta! 🚀' : score >= 20 ? 'Hebat banget! Kamu penangkap bintang andal ✦' : score >= 10 ? 'Lumayan! Semesta tersenyum sama kamu ♥' : 'Santai… coba lagi, pasti bisa! ♥';
     giftStage.classList.add('show-over');
     giftHint.textContent = 'Main lagi yuk ↺';
   }
@@ -746,6 +747,7 @@
     if (e.target.closest('.game-item')) {
       if (!playing) return;
       const it = e.target.closest('.game-item');
+      if (it.classList.contains('deco')) return;
       score += parseInt(it.dataset.v, 10);
       gameScoreEl.textContent = '⭐ ' + score;
       it.classList.add('caught');

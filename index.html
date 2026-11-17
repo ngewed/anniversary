@@ -287,7 +287,7 @@
     background: linear-gradient(135deg, #f43f5e, #8b5cf6);
     box-shadow: 0 8px 24px rgba(244, 63, 94, .5);
   }
-  .player-info { flex: 1; text-align: left; min-width: 0; }
+  .player-info { flex: 1; text-align: left; min-width: 0; display: flex; align-items: center; }
   .player-info .title { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .player-info .artist { font-size: 13px; color: #c7c3f5; margin-top: 3px; }
   .eq { display: flex; gap: 4px; height: 26px; align-items: flex-end; margin-top: 10px; }
@@ -318,7 +318,6 @@
   .orb-stage { position: relative; width: 100%; aspect-ratio: 1 / 1; }
   .orb-shape { position: absolute; inset: 0; overflow: hidden; z-index: 1; }
   .orb-shape img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .orb figcaption { font-size: 14px; color: #e9e6ff; letter-spacing: .04em; }
   .orb { transition: transform .25s ease; }
   .orb:hover { transform: translateY(-4px) scale(1.02); }
   /* Saturnus */
@@ -514,36 +513,29 @@
     </div>
 
     <div class="music reveal">
-      <h2>✦ Lagu Kita ✦</h2>
-      <p class="song">Lagu ini muter otomatis di latar belakang, tanpa iklan.</p>
       <div class="player-card paused" id="playerCard">
         <button class="play-btn" id="playBtn" aria-label="Putar atau jeda lagu">▶</button>
         <div class="player-info">
-          <div class="title">Prettiest Thing I've Ever Seen</div>
-          <div class="artist">LANY</div>
           <div class="eq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
       </div>
-      <p class="note">Kalau lagunya berhenti, ketuk tombol ♪ di pojok kanan bawah.</p>
     </div>
 
     <div class="gallery reveal">
-      <h2>✦ Galeri Kita ✦</h2>
-      <p>Setiap foto disimpan di dalam benda langit — klik untuk melihat gambarnya.</p>
       <div class="grid">
-        <figure class="orb obj-saturn" data-cap="Makan seafood"><div class="orb-stage"><div class="orb-shape"><img src="foto-01.jpg" alt="Makan seafood" loading="lazy"></div></div><figcaption>🪐 Makan seafood</figcaption></figure>
-        <figure class="orb obj-star" data-cap="Selfie berdua di malam hari"><div class="orb-stage"><div class="orb-shape"><img src="foto-02.jpg" alt="Selfie berdua di malam hari" loading="lazy"></div></div><figcaption>⭐ Selfie berdua di malam hari</figcaption></figure>
-        <figure class="orb obj-rocket" data-cap="Jalan malam"><div class="orb-stage"><div class="orb-shape"><img src="foto-03.jpg" alt="Jalan malam" loading="lazy"></div></div><figcaption>🚀 Jalan malam</figcaption></figure>
-        <figure class="orb obj-moon" data-cap="Ngemil di bawah pohon"><div class="orb-stage"><div class="orb-shape"><img src="foto-04.jpg" alt="Ngemil di bawah pohon" loading="lazy"></div></div><figcaption>🌙 Ngemil di bawah pohon</figcaption></figure>
-        <figure class="orb obj-ufo" data-cap="Ayunan di pantai"><div class="orb-stage"><div class="orb-shape"><img src="foto-05.jpg" alt="Ayunan di pantai" loading="lazy"></div></div><figcaption>🛸 Ayunan di pantai</figcaption></figure>
-        <figure class="orb obj-planet" style="--c:#fb7185" data-cap="Senyum lebar"><div class="orb-stage"><div class="orb-shape"><img src="foto-06.jpg" alt="Senyum lebar" loading="lazy"></div></div><figcaption>🔴 Senyum lebar</figcaption></figure>
-        <figure class="orb obj-planet" style="--c:#38bdf8" data-cap="Sushi time"><div class="orb-stage"><div class="orb-shape"><img src="foto-07.jpg" alt="Sushi time" loading="lazy"></div></div><figcaption>🌍 Sushi time</figcaption></figure>
-        <figure class="orb obj-comet" data-cap="Di tepi laut"><div class="orb-stage"><div class="orb-shape"><img src="foto-08.jpg" alt="Di tepi laut" loading="lazy"></div></div><figcaption>☄️ Di tepi laut</figcaption></figure>
-        <figure class="orb obj-helmet" data-cap="Di galeri seni"><div class="orb-stage"><div class="orb-shape"><img src="foto-09.jpg" alt="Di galeri seni" loading="lazy"></div></div><figcaption>🧑‍🚀 Di galeri seni</figcaption></figure>
-        <figure class="orb obj-planet" style="--c:#a78bfa" data-cap="Makan bareng"><div class="orb-stage"><div class="orb-shape"><img src="foto-10.jpg" alt="Makan bareng" loading="lazy"></div></div><figcaption>🟣 Makan bareng</figcaption></figure>
-        <figure class="orb obj-star" data-cap="Jalan di mal"><div class="orb-stage"><div class="orb-shape"><img src="foto-11.jpg" alt="Jalan di mal" loading="lazy"></div></div><figcaption>⭐ Jalan di mal</figcaption></figure>
-        <figure class="orb obj-rocket" data-cap="Selfie berdua di resto"><div class="orb-stage"><div class="orb-shape"><img src="foto-12.jpg" alt="Selfie berdua di resto" loading="lazy"></div></div><figcaption>🚀 Selfie berdua di resto</figcaption></figure>
-        <figure class="orb obj-sun" data-cap="Makan ayam goreng"><div class="orb-stage"><div class="orb-shape"><img src="foto-13.jpg" alt="Makan ayam goreng" loading="lazy"></div></div><figcaption>☀️ Makan ayam goreng</figcaption></figure>
+        <figure class="orb obj-saturn" data-cap="Makan seafood"><div class="orb-stage"><div class="orb-shape"><img src="foto-01.jpg" alt="Makan seafood" loading="lazy"></div></div></figure>
+        <figure class="orb obj-star" data-cap="Selfie berdua di malam hari"><div class="orb-stage"><div class="orb-shape"><img src="foto-02.jpg" alt="Selfie berdua di malam hari" loading="lazy"></div></div></figure>
+        <figure class="orb obj-rocket" data-cap="Jalan malam"><div class="orb-stage"><div class="orb-shape"><img src="foto-03.jpg" alt="Jalan malam" loading="lazy"></div></div></figure>
+        <figure class="orb obj-moon" data-cap="Ngemil di bawah pohon"><div class="orb-stage"><div class="orb-shape"><img src="foto-04.jpg" alt="Ngemil di bawah pohon" loading="lazy"></div></div></figure>
+        <figure class="orb obj-ufo" data-cap="Ayunan di pantai"><div class="orb-stage"><div class="orb-shape"><img src="foto-05.jpg" alt="Ayunan di pantai" loading="lazy"></div></div></figure>
+        <figure class="orb obj-planet" style="--c:#fb7185" data-cap="Senyum lebar"><div class="orb-stage"><div class="orb-shape"><img src="foto-06.jpg" alt="Senyum lebar" loading="lazy"></div></div></figure>
+        <figure class="orb obj-planet" style="--c:#38bdf8" data-cap="Sushi time"><div class="orb-stage"><div class="orb-shape"><img src="foto-07.jpg" alt="Sushi time" loading="lazy"></div></div></figure>
+        <figure class="orb obj-comet" data-cap="Di tepi laut"><div class="orb-stage"><div class="orb-shape"><img src="foto-08.jpg" alt="Di tepi laut" loading="lazy"></div></div></figure>
+        <figure class="orb obj-helmet" data-cap="Di galeri seni"><div class="orb-stage"><div class="orb-shape"><img src="foto-09.jpg" alt="Di galeri seni" loading="lazy"></div></div></figure>
+        <figure class="orb obj-planet" style="--c:#a78bfa" data-cap="Makan bareng"><div class="orb-stage"><div class="orb-shape"><img src="foto-10.jpg" alt="Makan bareng" loading="lazy"></div></div></figure>
+        <figure class="orb obj-star" data-cap="Jalan di mal"><div class="orb-stage"><div class="orb-shape"><img src="foto-11.jpg" alt="Jalan di mal" loading="lazy"></div></div></figure>
+        <figure class="orb obj-rocket" data-cap="Selfie berdua di resto"><div class="orb-stage"><div class="orb-shape"><img src="foto-12.jpg" alt="Selfie berdua di resto" loading="lazy"></div></div></figure>
+        <figure class="orb obj-sun" data-cap="Makan ayam goreng"><div class="orb-stage"><div class="orb-shape"><img src="foto-13.jpg" alt="Makan ayam goreng" loading="lazy"></div></div></figure>
       </div>
     </div>
     <div class="hint">KLIK DI MANA SAJA UNTUK HATI BERTERBANGAN</div>
@@ -551,7 +543,6 @@
 
   <div class="lightbox" id="lightbox">
     <img id="lightbox-img" src="" alt="">
-    <span id="lightbox-cap"></span>
   </div>
 
 <script>
@@ -657,13 +648,11 @@
   // Lightbox: klik benda langit -> foto kita muncul besar
   const lightbox = document.getElementById('lightbox');
   const lbImg = document.getElementById('lightbox-img');
-  const lbCap = document.getElementById('lightbox-cap');
   document.querySelectorAll('.orb').forEach((fig) => {
     fig.addEventListener('click', (e) => {
       e.stopPropagation();
       lbImg.src = fig.querySelector('img').src;
       lbImg.alt = fig.dataset.cap;
-      lbCap.textContent = fig.dataset.cap;
       lightbox.classList.add('open');
     });
   });

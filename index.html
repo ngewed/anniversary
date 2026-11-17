@@ -406,7 +406,7 @@
   .prize-result.revealed { font-size: 18px; font-weight: 800; color: #fcd34d; }
   .prize-sub { font-size: 13px; font-weight: 400; color: #e9e6ff; }
   .game-start button, .game-over button { padding: 14px 30px; border-radius: 999px; border: none; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #f43f5e, #8b5cf6); box-shadow: 0 8px 24px rgba(244, 63, 94, .5); cursor: pointer; }
-  .game-over button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
+
   .game-score-big { font-size: 58px; font-weight: 800; background: linear-gradient(92deg, #fda4af, #fbbf24, #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .game-over p { font-size: 16px; color: #e9e6ff; text-align: center; padding: 0 22px; line-height: 1.6; }
   .game-over .game-small { font-size: 13px; color: #c7c3f5; }
@@ -723,7 +723,6 @@
             </div>
             <div class="prize-result" id="prizeResult"></div>
           </div>
-          <button id="gameAgainBtn">&#8635; Main lagi</button>
         </div>
         <div class="gift-box" id="giftBox">
           <div class="gift-glow"></div>
@@ -912,7 +911,6 @@
     });
     giftStage.classList.add('show-over');
     gameLocked = true;
-    document.getElementById('gameAgainBtn').disabled = true;
     giftHint.textContent = 'Skor sudah keluar — refresh halaman untuk main lagi ♥';
   }
 
@@ -963,7 +961,6 @@
   });
 
   document.getElementById('gameStartBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
-  document.getElementById('gameAgainBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
   giftStage.addEventListener('contextmenu', (e) => e.preventDefault());
   const PRIZES = {
     1: { title: 'VOUCHER Rp150.000', sub: 'Selamat! Hadiahmu sudah menanti ♥' },

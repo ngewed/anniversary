@@ -11,6 +11,7 @@ bulan, dan galeri foto kita.
 - Lagu kita: **LANY — Prettiest Thing I've Ever Seen** (file `lagu.mp3` di-host di repo, muter otomatis di latar belakang tanpa iklan; mulai saat tombol "Buka Hadiah" diketuk)
 - Ornamen langit: UFO, roket, astronot, satelit, planet Saturnus/Mars/Bumi/ungu, bulan, bintang jatuh
 - Galeri: tiap foto di dalam bentuk benda langit (Saturnus, bintang, roket, bulan, UFO, planet, komet, helm astronot, matahari) — klik untuk melihat foto besar
+- Kotak hadiah: ketuk kotaknya, tutupnya terlepas dan roket meluncur mengikuti pita
 
 ## Cara melihat
 

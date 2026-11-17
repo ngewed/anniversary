@@ -256,6 +256,36 @@
   .foot { font-size: 13px; color: #9d97d8; letter-spacing: .12em; }
   .scroll-hint { margin-top: 26px; color: rgba(199, 195, 245, .75); font-size: 13px; letter-spacing: .2em; animation: bob 1.8s ease-in-out infinite; }
   @keyframes bob { 0%, 100% { transform: translateY(0); opacity: .6; } 50% { transform: translateY(6px); opacity: 1; } }
+  /* Kotak hadiah + roket mengikuti pita */
+  .gift { max-width: 560px; width: 100%; margin-top: 52px; text-align: center; }
+  .gift-stage { position: relative; width: 360px; max-width: 100%; height: 420px; margin: 0 auto; cursor: pointer; }
+  .gift-ribbon { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+  .gift-ribbon path { stroke-dasharray: 100; stroke-dashoffset: 100; transition: stroke-dashoffset 3.2s linear; filter: drop-shadow(0 0 8px rgba(251, 191, 36, .45)); }
+  .gift-stage.launched .gift-ribbon path { stroke-dashoffset: 0; }
+  .rocket-fly { position: absolute; left: 0; top: 0; width: 46px; height: 46px; font-size: 42px; line-height: 1; z-index: 5; pointer-events: none; opacity: 0; offset-path: path('M180 292 C 115 245, 60 255, 78 195 C 96 135, 262 165, 252 105 C 244 55, 150 65, 168 28'); offset-anchor: center; offset-rotate: auto; filter: drop-shadow(0 0 12px rgba(251, 146, 60, .6)); }
+  .gift-stage.launched .rocket-fly { opacity: 1; animation: flyAlong 3.2s ease-in-out forwards; }
+  @keyframes flyAlong { from { offset-distance: 0%; } to { offset-distance: 100%; } }
+  @supports not (offset-path: path('M0 0')) {
+    .gift-stage.launched .rocket-fly { animation: flyFallback 3.2s ease-in-out forwards; }
+    @keyframes flyFallback { from { transform: translate(157px, 269px); } to { transform: translate(145px, 5px); } }
+  }
+  .gift-box { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); width: 110px; height: 100px; z-index: 3; }
+  .gift-body { position: absolute; inset: 0; background: linear-gradient(180deg, #fb7185, #be123c); border-radius: 8px; box-shadow: 0 14px 30px rgba(0, 0, 0, .5); overflow: hidden; }
+  .gift-body::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 18px; transform: translateX(-50%); background: linear-gradient(180deg, #fde68a, #f59e0b); }
+  .gift-lid { position: absolute; left: -6px; right: -6px; top: -16px; height: 24px; background: linear-gradient(180deg, #f43f5e, #9f1239); border-radius: 6px; box-shadow: 0 6px 16px rgba(0, 0, 0, .45); transition: transform .6s ease, opacity .6s ease; z-index: 2; }
+  .gift-lid::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 18px; transform: translateX(-50%); background: linear-gradient(180deg, #fde68a, #f59e0b); }
+  .gift-bow { position: absolute; left: 50%; top: -14px; transform: translateX(-50%); width: 44px; height: 20px; }
+  .gift-bow::before, .gift-bow::after { content: ""; position: absolute; top: 0; width: 22px; height: 18px; border: 3px solid #fbbf24; border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%; background: rgba(251, 191, 36, .25); }
+  .gift-bow::before { left: 0; transform: rotate(-24deg); }
+  .gift-bow::after { right: 0; transform: rotate(24deg); }
+  .gift-glow { position: absolute; left: 50%; top: -30px; width: 180px; height: 180px; transform: translate(-50%, 0) scale(.4); background: radial-gradient(circle, rgba(253, 211, 77, .75), rgba(244, 63, 94, .35) 45%, transparent 70%); border-radius: 50%; opacity: 0; transition: opacity .5s ease, transform .8s ease; pointer-events: none; z-index: 0; }
+  .gift-stage.launched .gift-lid { transform: translateY(-70px) rotate(-20deg); opacity: 0; }
+  .gift-stage.launched .gift-glow { opacity: 1; transform: translate(-50%, 0) scale(1.4); }
+  .gift-msg { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%) scale(.8); opacity: 0; transition: opacity .6s ease .3s, transform .6s ease .3s; z-index: 6; pointer-events: none; font-size: 22px; font-weight: 800; line-height: 1.5; color: #fda4af; text-shadow: 0 0 18px rgba(251, 113, 133, .8); }
+  .gift-stage.launched .gift-msg { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .gift-hint { margin-top: 14px; font-size: 14px; color: #c7c3f5; letter-spacing: .06em; }
+  .gift-heart { position: absolute; z-index: 7; pointer-events: none; font-size: 20px; color: #fb7185; text-shadow: 0 0 12px rgba(251, 113, 133, .8); animation: giftBurst 1.5s ease-out forwards; }
+  @keyframes giftBurst { from { opacity: 1; transform: translateY(0) scale(1); } to { opacity: 0; transform: translateY(-70px) scale(1.4) rotate(14deg); } }
   /* Surat */
   .letter {
     max-width: 560px; width: 100%; margin-top: 52px; text-align: center;
@@ -507,6 +537,29 @@
       <div class="scroll-hint">↓ GESER KE BAWAH ↓</div>
     </div>
 
+    <div class="gift reveal">
+      <div class="gift-stage" id="giftStage">
+        <svg class="gift-ribbon" viewBox="0 0 360 420" aria-hidden="true">
+          <defs>
+            <linearGradient id="ribbonGrad" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0%" stop-color="#f43f5e"/>
+              <stop offset="55%" stop-color="#fbbf24"/>
+              <stop offset="100%" stop-color="#a78bfa"/>
+            </linearGradient>
+          </defs>
+          <path d="M180 292 C 115 245, 60 255, 78 195 C 96 135, 262 165, 252 105 C 244 55, 150 65, 168 28" fill="none" stroke="url(#ribbonGrad)" stroke-width="6" stroke-linecap="round" pathLength="100"/>
+        </svg>
+        <div class="rocket-fly" id="rocketFly">&#128640;</div>
+        <div class="gift-msg" id="giftMsg">Selamat 2 tahun,<br>sayang &#10084;</div>
+        <div class="gift-box" id="giftBox">
+          <div class="gift-glow"></div>
+          <div class="gift-lid"><span class="gift-bow"></span></div>
+          <div class="gift-body"></div>
+        </div>
+      </div>
+      <p class="gift-hint" id="giftHint">&#127873; Ketuk hadiahnya</p>
+    </div>
+
     <div class="letter reveal">
       <h2>✉ Surat Untukmu</h2>
       <p><span id="letterText"></span><span class="caret" id="letterCaret"></span></p>
@@ -603,6 +656,32 @@
     gate.classList.add('hidden');
     bgm.play().catch(() => {});
     setTimeout(() => gate.remove(), 1000);
+  });
+
+  // Kotak hadiah: ketuk -> roket meluncur mengikuti pita
+  const giftStage = document.getElementById('giftStage');
+  const giftHint = document.getElementById('giftHint');
+  let giftTimer = null;
+  giftStage.addEventListener('click', (e) => {
+    e.stopPropagation();
+    clearTimeout(giftTimer);
+    document.querySelectorAll('.gift-heart').forEach((h) => h.remove());
+    giftStage.classList.remove('launched');
+    void giftStage.offsetWidth;
+    giftStage.classList.add('launched');
+    giftHint.textContent = 'Ketuk lagi untuk mengulang \u21ba';
+    giftTimer = setTimeout(() => {
+      for (let i = 0; i < 14; i++) {
+        const h = document.createElement('span');
+        h.className = 'gift-heart';
+        h.textContent = Math.random() > 0.4 ? '\u2665' : '\u2726';
+        h.style.left = (50 + Math.random() * 260) + 'px';
+        h.style.top = (20 + Math.random() * 110) + 'px';
+        h.style.animationDelay = (Math.random() * 0.4) + 's';
+        giftStage.appendChild(h);
+        setTimeout(() => h.remove(), 2200);
+      }
+    }, 3200);
   });
 
   // Surat mengetik sendiri saat terlihat

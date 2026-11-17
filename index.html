@@ -232,12 +232,10 @@
     border-radius: 50%; pointer-events: none;
     background:
       radial-gradient(ellipse 28% 42% at 28% 22%, rgba(255, 255, 255, .55), transparent 70%),
-      radial-gradient(ellipse 30% 45% at 30% 25%, rgba(34, 197, 94, .85), transparent 70%),
-      radial-gradient(ellipse 24% 38% at 66% 32%, rgba(34, 197, 94, .7), transparent 70%),
-      radial-gradient(ellipse 18% 30% at 50% 12%, rgba(74, 222, 128, .55), transparent 70%),
       radial-gradient(ellipse 120% 95% at 50% 0%, #7dd3fc 0%, #2563eb 45%, #1e3a8a 100%);
     box-shadow: 0 -8px 44px rgba(125, 211, 252, .75), inset 0 14px 34px rgba(125, 211, 252, .55);
   }
+  .gate-earth-map { position: absolute; inset: 0; width: 100%; height: 100%; }
   .gate-earth::before {
     content: ""; position: absolute; inset: 0; border-radius: 50%;
     border-top: 3px solid rgba(186, 230, 253, .95);
@@ -633,7 +631,23 @@
       <span class="sky" style="top:26%; left:20%; font-size:40px; animation-duration:6.8s; animation-delay:-2.5s;">🛸</span>
       <span class="sky" style="top:25%; right:20%; font-size:42px; animation-duration:7.4s; animation-delay:-.5s;">🛸</span>
     </div>
-    <div class="gate-earth" aria-hidden="true"></div>
+    <div class="gate-earth" aria-hidden="true">
+      <svg class="gate-earth-map" viewBox="0 0 600 160" preserveAspectRatio="xMidYMin slice">
+        <g fill="#22c55e">
+          <path d="M55 45 Q85 25 115 45 Q145 68 158 98 Q148 110 125 96 Q95 78 70 64 Q50 55 55 45 Z"/>
+          <path d="M175 108 Q225 100 285 106 Q292 114 240 118 Q190 118 175 108 Z"/>
+          <path d="M235 20 Q285 6 315 32 Q322 62 292 80 Q248 86 228 60 Q220 38 235 20 Z"/>
+          <path d="M335 40 Q352 28 362 44 Q376 38 382 54 Q372 68 356 62 Q346 74 334 60 Q328 48 335 40 Z"/>
+          <path d="M425 68 Q475 50 525 64 Q565 72 556 96 Q508 110 452 102 Q422 90 425 68 Z"/>
+          <ellipse cx="290" cy="116" rx="6" ry="3"/>
+          <ellipse cx="305" cy="120" rx="8" ry="3"/>
+          <ellipse cx="330" cy="122" rx="7" ry="3"/>
+          <ellipse cx="352" cy="120" rx="6" ry="3"/>
+          <circle cx="392" cy="46" r="4"/>
+          <circle cx="404" cy="62" r="3.5"/>
+        </g>
+      </svg>
+    </div>
     <button class="gate-rocket" id="gateBtn" type="button" aria-label="Luncurkan roket">
       <span class="rocket-body">
         <span class="rocket-emoji">🚀</span>

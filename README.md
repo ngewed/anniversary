@@ -8,6 +8,7 @@ bulan, dan galeri foto kita.
 - `index.html` — halaman aniversary (buka langsung di browser, tanpa server)
 - `foto-kita.jpg` — foto kita berdua (bingkai utama)
 - `foto-01.jpg` s.d. `foto-13.jpg` — galeri kenangan
+- Lagu kita: **LANY — Prettiest Thing I've Ever Seen** (embed YouTube di halaman)
 
 ## Cara melihat
 

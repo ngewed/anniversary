@@ -124,6 +124,19 @@
   .msg b { color: #fda4af; }
   .divider { margin: 26px auto 18px; color: #fcd34d; letter-spacing: .5em; font-size: 13px; }
   .foot { font-size: 13px; color: #9d97d8; letter-spacing: .12em; }
+  /* Music */
+  .music { max-width: 600px; width: 100%; margin-top: 56px; text-align: center; }
+  .music h2 {
+    font-size: 24px; letter-spacing: .18em; text-transform: uppercase;
+    color: #fcd34d; margin-bottom: 6px;
+  }
+  .music p { color: #c7c3f5; font-size: 14px; margin-bottom: 20px; }
+  .player {
+    border-radius: 18px; overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, .16);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4), 0 0 24px rgba(139, 92, 246, .25);
+  }
+  .player iframe { width: 100%; aspect-ratio: 16 / 9; display: block; border: 0; }
   /* Gallery */
   .gallery { max-width: 860px; width: 100%; margin-top: 56px; text-align: center; }
   .gallery h2 {
@@ -216,6 +229,14 @@
       <p class="foot">UNTUK KITA, DARI SEMESTA YANG LUAS</p>
     </div>
 
+    <div class="music">
+      <h2>✦ Lagu Kita ✦</h2>
+      <p>LANY — Prettiest Thing I've Ever Seen</p>
+      <div class="player">
+        <iframe src="https://www.youtube.com/embed/_nRzDvk1Yrg" title="LANY — Prettiest Thing I've Ever Seen" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </div>
+
     <div class="gallery">
       <h2>✦ Galeri Kita ✦</h2>
       <p>Kenangan-kenangan kecil di antara bintang-bintang. Klik foto untuk memperbesar.</p>
@@ -277,7 +298,7 @@
 
   // Click to spawn a floating heart
   document.addEventListener('click', (e) => {
-    if (e.target.closest('.grid figure') || e.target.closest('.lightbox')) return;
+    if (e.target.closest('.grid figure') || e.target.closest('.lightbox') || e.target.closest('.player')) return;
     const h = document.createElement('span');
     h.className = 'heart';
     h.textContent = Math.random() > 0.5 ? '♥' : '✦';

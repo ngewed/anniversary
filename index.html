@@ -6,12 +6,12 @@
 <title>Happy Anniversary — 17 November 2026</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  html, body { height: 100%; }
+  html, body { min-height: 100%; }
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background: #04040f;
     color: #f2f0ff;
-    overflow: hidden;
+    overflow-x: hidden;
     position: relative;
   }
   /* Nebula */
@@ -71,11 +71,12 @@
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-14px); }
   }
-  /* Card */
+  /* Layout */
   .wrap {
     position: relative; z-index: 2;
-    min-height: 100vh; display: flex; align-items: center; justify-content: center;
-    padding: 24px;
+    min-height: 100vh; display: flex; flex-direction: column;
+    align-items: center; justify-content: flex-start;
+    padding: 48px 24px 64px;
   }
   .card {
     max-width: 600px; width: 100%; text-align: center;
@@ -123,6 +124,45 @@
   .msg b { color: #fda4af; }
   .divider { margin: 26px auto 18px; color: #fcd34d; letter-spacing: .5em; font-size: 13px; }
   .foot { font-size: 13px; color: #9d97d8; letter-spacing: .12em; }
+  /* Gallery */
+  .gallery { max-width: 860px; width: 100%; margin-top: 56px; text-align: center; }
+  .gallery h2 {
+    font-size: 24px; letter-spacing: .18em; text-transform: uppercase;
+    color: #fcd34d; margin-bottom: 6px;
+  }
+  .gallery p { color: #c7c3f5; font-size: 14px; margin-bottom: 26px; }
+  .grid {
+    display: grid; gap: 16px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .grid figure {
+    border-radius: 18px; overflow: hidden; cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, .14);
+    background: rgba(255, 255, 255, .05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .4);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .grid figure:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,.55), 0 0 24px rgba(253, 211, 77, .18); }
+  .grid img { width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; }
+  .grid figcaption {
+    padding: 10px 8px; font-size: 13px; color: #e9e6ff;
+    background: rgba(11, 6, 32, .72); letter-spacing: .04em;
+  }
+  /* Lightbox */
+  .lightbox {
+    position: fixed; inset: 0; z-index: 10; display: none;
+    align-items: center; justify-content: center; flex-direction: column;
+    background: rgba(2, 2, 12, .92); backdrop-filter: blur(6px);
+    cursor: pointer; padding: 24px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox img {
+    max-width: min(92vw, 560px); max-height: 78vh;
+    border-radius: 16px; object-fit: contain;
+    border: 1px solid rgba(255, 255, 255, .25);
+    box-shadow: 0 0 60px rgba(139, 92, 246, .4);
+  }
+  .lightbox span { margin-top: 16px; color: #e9e6ff; font-size: 15px; letter-spacing: .06em; }
   .heart {
     position: fixed; z-index: 3; pointer-events: none;
     font-size: 18px; color: #fb7185;
@@ -133,9 +173,10 @@
     from { opacity: 1; transform: translateY(0) scale(1); }
     to { opacity: 0; transform: translateY(-90px) scale(1.5) rotate(12deg); }
   }
-  .hint { position: fixed; z-index: 2; bottom: 18px; width: 100%; text-align: center; font-size: 12px; color: rgba(199, 195, 245, .55); letter-spacing: .14em; }
-  @media (max-width: 560px) {
-    .planet { width: 96px; height: 96px; right: 4%; top: 6%; }
+  .hint { margin-top: 44px; font-size: 12px; color: rgba(199, 195, 245, .55); letter-spacing: .14em; text-align: center; }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .planet { width: 96px; height: 96px; right: 4%; top: 5%; }
     .planet::after { width: 150px; height: 38px; }
     .moon { width: 44px; height: 44px; left: 5%; bottom: 8%; }
     .card { padding: 34px 22px 28px; }
@@ -174,8 +215,33 @@
       <div class="divider">✦ ✦ ✦</div>
       <p class="foot">UNTUK KITA, DARI SEMESTA YANG LUAS</p>
     </div>
+
+    <div class="gallery">
+      <h2>✦ Galeri Kita ✦</h2>
+      <p>Kenangan-kenangan kecil di antara bintang-bintang. Klik foto untuk memperbesar.</p>
+      <div class="grid">
+        <figure data-cap="Makan seafood"><img src="foto-01.jpg" alt="Makan seafood" loading="lazy"><figcaption>Makan seafood</figcaption></figure>
+        <figure data-cap="Selfie berdua di malam hari"><img src="foto-02.jpg" alt="Selfie berdua di malam hari" loading="lazy"><figcaption>Selfie berdua di malam hari</figcaption></figure>
+        <figure data-cap="Jalan malam"><img src="foto-03.jpg" alt="Jalan malam" loading="lazy"><figcaption>Jalan malam</figcaption></figure>
+        <figure data-cap="Ngemil di bawah pohon"><img src="foto-04.jpg" alt="Ngemil di bawah pohon" loading="lazy"><figcaption>Ngemil di bawah pohon</figcaption></figure>
+        <figure data-cap="Ayunan di pantai"><img src="foto-05.jpg" alt="Ayunan di pantai" loading="lazy"><figcaption>Ayunan di pantai</figcaption></figure>
+        <figure data-cap="Senyum lebar"><img src="foto-06.jpg" alt="Senyum lebar" loading="lazy"><figcaption>Senyum lebar</figcaption></figure>
+        <figure data-cap="Sushi time"><img src="foto-07.jpg" alt="Sushi time" loading="lazy"><figcaption>Sushi time</figcaption></figure>
+        <figure data-cap="Di tepi laut"><img src="foto-08.jpg" alt="Di tepi laut" loading="lazy"><figcaption>Di tepi laut</figcaption></figure>
+        <figure data-cap="Di galeri seni"><img src="foto-09.jpg" alt="Di galeri seni" loading="lazy"><figcaption>Di galeri seni</figcaption></figure>
+        <figure data-cap="Makan bareng"><img src="foto-10.jpg" alt="Makan bareng" loading="lazy"><figcaption>Makan bareng</figcaption></figure>
+        <figure data-cap="Jalan di mal"><img src="foto-11.jpg" alt="Jalan di mal" loading="lazy"><figcaption>Jalan di mal</figcaption></figure>
+        <figure data-cap="Selfie berdua di resto"><img src="foto-12.jpg" alt="Selfie berdua di resto" loading="lazy"><figcaption>Selfie berdua di resto</figcaption></figure>
+        <figure data-cap="Makan ayam goreng"><img src="foto-13.jpg" alt="Makan ayam goreng" loading="lazy"><figcaption>Makan ayam goreng</figcaption></figure>
+      </div>
+    </div>
+    <div class="hint">KLIK DI MANA SAJA UNTUK HATI BERTERBANGAN</div>
   </div>
-  <div class="hint">KLIK DI MANA SAJA UNTUK HATI BERTERBANGAN</div>
+
+  <div class="lightbox" id="lightbox">
+    <img id="lightbox-img" src="" alt="">
+    <span id="lightbox-cap"></span>
+  </div>
 
 <script>
   // Starfield
@@ -211,6 +277,7 @@
 
   // Click to spawn a floating heart
   document.addEventListener('click', (e) => {
+    if (e.target.closest('.grid figure') || e.target.closest('.lightbox')) return;
     const h = document.createElement('span');
     h.className = 'heart';
     h.textContent = Math.random() > 0.5 ? '♥' : '✦';
@@ -218,6 +285,24 @@
     h.style.top = (e.clientY - 9) + 'px';
     document.body.appendChild(h);
     setTimeout(() => h.remove(), 1700);
+  });
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbCap = document.getElementById('lightbox-cap');
+  document.querySelectorAll('.grid figure').forEach((fig) => {
+    fig.addEventListener('click', (e) => {
+      e.stopPropagation();
+      lbImg.src = fig.querySelector('img').src;
+      lbImg.alt = fig.dataset.cap;
+      lbCap.textContent = fig.dataset.cap;
+      lightbox.classList.add('open');
+    });
+  });
+  lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') lightbox.classList.remove('open');
   });
 </script>
 </body>

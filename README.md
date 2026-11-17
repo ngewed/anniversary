@@ -1,12 +1,13 @@
 # Happy Anniversary — 17 November 2026 ✦
 
 Halaman aniversary bertema luar angkasa: langit berbintang, planet bercincin,
-bulan, dan satu bingkai foto untuk kita.
+bulan, dan galeri foto kita.
 
 ## Isi repo
 
 - `index.html` — halaman aniversary (buka langsung di browser, tanpa server)
-- `foto-kita.jpg` — foto kita (menyusul)
+- `foto-kita.jpg` — foto kita berdua (bingkai utama)
+- `foto-01.jpg` s.d. `foto-13.jpg` — galeri kenangan
 
 ## Cara melihat
 

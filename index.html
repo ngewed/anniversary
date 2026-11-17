@@ -580,7 +580,7 @@
             <div class="game-guide-title">Cara main</div>
             <div>&#11088; Bintang = +1 poin</div>
             <div>&#10084; Love = +3 poin</div>
-            <div>&#129680;&#9728;&#65039; Planet &amp; komet = -1 poin</div>
+            <div>&#129680;&#9728;&#65039;&#128125; Planet, komet &amp; alien = -1 poin</div>
             <div>&#9201; 30 detik &mdash; tangkap sebanyak-banyaknya!</div>
           </div>
           <button id="gameStartBtn">&#9654; Mulai Main</button>
@@ -714,10 +714,10 @@
   function spawnItem() {
     const r = Math.random();
     let emoji = '⭐', v = 1, deco = false;
-    if (r < 0.12) { emoji = '🪐'; deco = true; }
-    else if (r < 0.2) { emoji = '☄️'; deco = true; }
-    else if (r < 0.38) { emoji = '♥'; v = 3; }
-    else if (r < 0.55) { emoji = '✦'; v = 1; }
+    if (r < 0.1) { emoji = '🪐'; deco = true; }
+    else if (r < 0.18) { emoji = '☄️'; deco = true; }
+    else if (r < 0.26) { emoji = '👽'; deco = true; }
+    else if (r < 0.44) { emoji = '♥'; v = 3; }
     const it = document.createElement('span');
     it.className = 'game-item' + (deco ? ' deco' : '');
     it.textContent = emoji;

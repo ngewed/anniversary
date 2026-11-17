@@ -440,8 +440,8 @@
     background: linear-gradient(135deg, #f43f5e, #8b5cf6);
     box-shadow: 0 8px 24px rgba(244, 63, 94, .5);
   }
-  .player-info { flex: 1; text-align: left; min-width: 0; display: flex; align-items: center; }
-  .player-info .title { font-size: 15px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .player-info { flex: 1; text-align: left; min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .player-info .title { font-size: 15px; font-weight: 700; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .player-info .artist { font-size: 13px; color: #c7c3f5; margin-top: 3px; }
   .eq { display: flex; gap: 4px; height: 26px; align-items: flex-end; margin-top: 10px; }
   .eq span { width: 5px; border-radius: 3px; background: linear-gradient(#fda4af, #fbbf24); height: 30%; animation: eqBounce 1s ease-in-out infinite; }
@@ -741,6 +741,8 @@
       <div class="player-card paused" id="playerCard">
         <button class="play-btn" id="playBtn" aria-label="Putar atau jeda lagu">▶</button>
         <div class="player-info">
+          <div class="title">Prettiest Thing I've Ever Seen</div>
+          <div class="artist">LANY</div>
           <div class="eq"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
       </div>

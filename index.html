@@ -598,7 +598,7 @@
             <div>&#11088; Bintang = +1 poin</div>
             <div>&#10084; Love = +3 poin</div>
             <div>&#129680;&#9728;&#65039;&#128125; Planet, komet &amp; alien = -1 poin</div>
-            <div>&#9201; 30 detik &mdash; tangkap sebanyak-banyaknya!</div>
+            <div>&#9201; 30 detik &mdash; makin lama makin cepat!</div>
           </div>
           <button id="gameStartBtn">&#9654; Mulai Main</button>
         </div>
@@ -751,7 +751,9 @@
     if (!deco) it.dataset.v = v;
     it.style.left = (8 + Math.random() * 300) + 'px';
     it.style.fontSize = (26 + Math.random() * 14) + 'px';
-    it.style.animationDuration = (2.6 + Math.random() * 1.6) + 's';
+    const elapsed = 30 - timeLeft;
+    const baseDur = 3.6 - elapsed * 0.06;
+    it.style.animationDuration = (baseDur + Math.random() * 0.6) + 's';
     it.addEventListener('animationend', () => it.remove());
     giftStage.appendChild(it);
   }

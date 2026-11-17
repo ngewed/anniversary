@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Happy Anniversary — 17 November 2026</title>
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  img { -webkit-user-drag: none; }
   html, body { min-height: 100%; }
   body {
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -403,6 +404,7 @@
   .prize-result.revealed { font-size: 18px; font-weight: 800; color: #fcd34d; }
   .prize-sub { font-size: 13px; font-weight: 400; color: #e9e6ff; }
   .game-start button, .game-over button { padding: 14px 30px; border-radius: 999px; border: none; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #f43f5e, #8b5cf6); box-shadow: 0 8px 24px rgba(244, 63, 94, .5); cursor: pointer; }
+  .game-over button:disabled { opacity: .45; cursor: not-allowed; box-shadow: none; }
   .game-score-big { font-size: 58px; font-weight: 800; background: linear-gradient(92deg, #fda4af, #fbbf24, #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .game-over p { font-size: 16px; color: #e9e6ff; text-align: center; padding: 0 22px; line-height: 1.6; }
   .game-over .game-small { font-size: 13px; color: #c7c3f5; }
@@ -861,7 +863,7 @@
   const gameTier = document.getElementById('gameTier');
   const prizeResult = document.getElementById('prizeResult');
   let giftTimer = null, spawnTimer = null, tickTimer = null;
-  let score = 0, timeLeft = 30, playing = false, spedUp = false;
+  let score = 0, timeLeft = 30, playing = false, spedUp = false, gameLocked = false;
 
   function clearField() { document.querySelectorAll('.game-item').forEach((i) => i.remove()); }
 
@@ -886,6 +888,7 @@
   }
 
   function startGame() {
+    if (gameLocked) return;
     score = 0; timeLeft = 30; playing = true; spedUp = false;
     gameScoreEl.textContent = '⭐ 0';
     gameTimeEl.textContent = '⏱ 30';
@@ -922,7 +925,9 @@
       else box.classList.add('locked');
     });
     giftStage.classList.add('show-over');
-    giftHint.textContent = 'Main lagi yuk ↺';
+    gameLocked = true;
+    document.getElementById('gameAgainBtn').disabled = true;
+    giftHint.textContent = 'Skor sudah keluar — refresh halaman untuk main lagi ♥';
   }
 
   function catchItem(it) {
@@ -956,7 +961,7 @@
   giftStage.addEventListener('click', (e) => {
     if (e.target.closest('.game-item')) return;
     if (playing) return;
-    if (giftStage.classList.contains('show-over')) { startGame(); return; }
+    if (giftStage.classList.contains('show-over')) return;
     if (giftStage.classList.contains('show-start')) return;
     e.stopPropagation();
     clearTimeout(giftTimer);
@@ -1053,6 +1058,11 @@
   lightbox.addEventListener('click', () => lightbox.classList.remove('open'));
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') lightbox.classList.remove('open');
+  });
+
+  // Website tidak bisa di-copy-paste
+  ['copy', 'cut', 'paste', 'selectstart', 'contextmenu', 'dragstart'].forEach((ev) => {
+    document.addEventListener(ev, (e) => e.preventDefault());
   });
 </script>
 </body>

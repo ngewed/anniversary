@@ -298,6 +298,8 @@
   .game-start, .game-over { position: absolute; inset: 0; z-index: 9; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 14px; background: rgba(4, 4, 15, .55); backdrop-filter: blur(2px); border-radius: 18px; }
   .gift-stage.show-start .game-start { display: flex; }
   .gift-stage.show-over .game-over { display: flex; }
+  .game-guide { text-align: center; color: #e9e6ff; font-size: 15px; line-height: 1.9; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .14); border-radius: 16px; padding: 16px 20px; }
+  .game-guide-title { font-size: 17px; font-weight: 800; color: #fcd34d; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 6px; }
   .game-start button, .game-over button { padding: 14px 30px; border-radius: 999px; border: none; font-size: 17px; font-weight: 800; color: #fff; background: linear-gradient(135deg, #f43f5e, #8b5cf6); box-shadow: 0 8px 24px rgba(244, 63, 94, .5); cursor: pointer; }
   .game-score-big { font-size: 58px; font-weight: 800; background: linear-gradient(92deg, #fda4af, #fbbf24, #a5b4fc); -webkit-background-clip: text; background-clip: text; color: transparent; }
   .game-over p { font-size: 16px; color: #e9e6ff; text-align: center; padding: 0 22px; line-height: 1.6; }
@@ -569,7 +571,16 @@
         <div class="rocket-fly" id="rocketFly">&#128640;</div>
         <div class="game-hud" id="gameHud"><span id="gameScore">&#11088; 0</span><span id="gameTime">&#9201; 30</span></div>
         <div class="game-bar"><i id="gameBarFill"></i></div>
-        <div class="game-start" id="gameStart"><button id="gameStartBtn">&#9654; Mulai Main</button></div>
+        <div class="game-start" id="gameStart">
+          <div class="game-guide">
+            <div class="game-guide-title">Cara main</div>
+            <div>&#11088; Bintang = +1 poin</div>
+            <div>&#10084; Love = +3 poin</div>
+            <div>&#129680;&#9728;&#65039; Planet &amp; komet jangan diklik</div>
+            <div>&#9201; 30 detik &mdash; tangkap sebanyak-banyaknya!</div>
+          </div>
+          <button id="gameStartBtn">&#9654; Mulai Main</button>
+        </div>
         <div class="game-over" id="gameOver">
           <div class="game-score-big" id="gameScoreBig">0</div>
           <p id="gameTier"></p>

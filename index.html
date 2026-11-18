@@ -1019,7 +1019,7 @@
     if (e.target.closest('.orb') || e.target.closest('.lightbox') || e.target.closest('.music-fab') || e.target.closest('.play-btn') || e.target.closest('.gate') || e.target.closest('.player-card') || e.target.closest('.gift-stage')) return;
     const h = document.createElement('span');
     h.className = 'heart';
-    h.textContent = Math.random() > 0.5 ? '♥' : '✦';
+    h.textContent = '♥';
     h.style.left = (e.clientX - 9) + 'px';
     h.style.top = (e.clientY - 9) + 'px';
     document.body.appendChild(h);

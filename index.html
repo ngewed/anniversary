@@ -184,10 +184,12 @@
   }
   .rocket-body {
     display: flex; flex-direction: column; align-items: center;
-    transform: rotate(-45deg);
     filter: drop-shadow(0 0 26px rgba(251, 146, 60, .55));
   }
-  .rocket-emoji { font-size: min(44vw, 190px); line-height: 1; display: block; }
+  .rocket-emoji { display: block; }
+  .rocket-emoji svg { width: min(34vw, 120px); height: auto; display: block; }
+  .rocket-fly svg { width: 19px; height: 46px; display: block; margin: 0 auto; }
+  .rocket svg { width: 17px; height: 42px; display: block; }
   .rocket-flame {
     width: 44px; height: 58px; margin-top: -6px;
     background: radial-gradient(circle at 50% 18%, #fef9c3, #fbbf24 35%, #f97316 62%, #ef4444 100%);
@@ -232,6 +234,7 @@
     width: 150vw; height: 34vh; transform: translateX(-50%);
     border-radius: 50%; pointer-events: none;
     background:
+      url("https://commons.wikimedia.org/wiki/Special:FilePath/The%20Earth%20seen%20from%20Apollo%2017.jpg?width=1024") center top / 150vw auto no-repeat,
       radial-gradient(ellipse 28% 42% at 28% 22%, rgba(255, 255, 255, .55), transparent 70%),
       radial-gradient(ellipse 30% 45% at 30% 25%, rgba(34, 197, 94, .85), transparent 70%),
       radial-gradient(ellipse 24% 38% at 66% 32%, rgba(34, 197, 94, .7), transparent 70%),
@@ -259,15 +262,14 @@
     animation: decorFloat 6s ease-in-out infinite;
     filter: drop-shadow(0 0 10px rgba(125, 211, 252, .5));
   }
-  .pl-mercury { width: 16px; height: 16px; background: radial-gradient(circle at 35% 30%, #d6c9b8, #8a7a6a 60%, #5d5348); }
-  .pl-venus { width: 26px; height: 26px; background: radial-gradient(circle at 35% 30%, #f7e3ac, #e0b95c 60%, #a67c2e); }
-  .pl-earth { width: 28px; height: 28px; background: radial-gradient(circle at 35% 30%, #7dd3fc, #2563eb 55%, #1e40af); box-shadow: inset -4px -4px 8px rgba(0, 0, 0, .45), 0 0 14px rgba(59, 130, 246, .5); }
-  .pl-mars { width: 22px; height: 22px; background: radial-gradient(circle at 35% 30%, #fca5a5, #c1440e 60%, #7c2d12); }
-  .pl-jupiter { width: 52px; height: 52px; background: radial-gradient(circle at 35% 30%, #fde68a, #d8a86a 45%, #a16207 75%, #92400e); }
-  .pl-saturn { width: 46px; height: 46px; background: radial-gradient(circle at 35% 30%, #fef3c7, #e3cfa3 60%, #a68b5b); }
-  .pl-saturn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 78px; height: 20px; transform: translate(-50%, -50%) rotate(-18deg); border: 3px solid rgba(253, 230, 138, .85); border-radius: 50%; }
-  .pl-uranus { width: 36px; height: 36px; background: radial-gradient(circle at 35% 30%, #cffafe, #67e8f9 55%, #0e7490); }
-  .pl-neptune { width: 34px; height: 34px; background: radial-gradient(circle at 35% 30%, #93c5fd, #3b82f6 55%, #1e3a8a); }
+  .pl-mercury { width: 16px; height: 16px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Mercury%20in%20color%20-%20Prockter07%20centered.jpg?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #d6c9b8, #8a7a6a 60%, #5d5348); }
+  .pl-venus { width: 26px; height: 26px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Venus-real%20color.jpg?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #f7e3ac, #e0b95c 60%, #a67c2e); }
+  .pl-earth { width: 28px; height: 28px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/The%20Earth%20seen%20from%20Apollo%2017.jpg?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #7dd3fc, #2563eb 55%, #1e40af); box-shadow: inset -4px -4px 8px rgba(0, 0, 0, .45), 0 0 14px rgba(59, 130, 246, .5); }
+  .pl-mars { width: 22px; height: 22px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Mars%20Valles%20Marineris.jpeg?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #fca5a5, #c1440e 60%, #7c2d12); }
+  .pl-jupiter { width: 52px; height: 52px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Jupiter%20and%20its%20shrunken%20Great%20Red%20Spot.jpg?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #fde68a, #d8a86a 45%, #a16207 75%, #92400e); }
+  .pl-saturn { width: 78px; height: 40px; border-radius: 0; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Saturn%20during%20Equinox.jpg?width=200") center/contain no-repeat; box-shadow: 0 0 12px rgba(255, 255, 255, .12); }
+  .pl-uranus { width: 36px; height: 36px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Uranus2%20%28cropped%29.jpg?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #cffafe, #67e8f9 55%, #0e7490); }
+  .pl-neptune { width: 34px; height: 34px; background: url("https://commons.wikimedia.org/wiki/Special:FilePath/Neptune%20Voyager2%20color%20calibrated.png?width=200") center/cover no-repeat, radial-gradient(circle at 35% 30%, #93c5fd, #3b82f6 55%, #1e3a8a); }
   /* ---------- Tombol musik melayang ---------- */
   .music-fab {
     position: fixed; right: 18px; bottom: 18px; z-index: 40;
@@ -601,6 +603,27 @@
 </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="rocketBodyGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#ffffff"/>
+        <stop offset=".55" stop-color="#e2e8f0"/>
+        <stop offset="1" stop-color="#94a3b8"/>
+      </linearGradient>
+      <symbol id="rocketReal" viewBox="0 0 120 300">
+        <path d="M45 64 C45 32 50 14 60 8 C70 14 75 32 75 64 Z" fill="url(#rocketBodyGrad)"/>
+        <rect x="45" y="64" width="30" height="16" fill="#1e293b"/>
+        <rect x="36" y="84" width="9" height="16" rx="2" fill="#334155"/>
+        <rect x="75" y="84" width="9" height="16" rx="2" fill="#334155"/>
+        <rect x="45" y="80" width="30" height="166" fill="url(#rocketBodyGrad)"/>
+        <rect x="49" y="80" width="6" height="166" fill="#ffffff" opacity=".55"/>
+        <rect x="68" y="80" width="7" height="166" fill="#0f172a" opacity=".12"/>
+        <rect x="45" y="246" width="30" height="14" fill="#475569"/>
+        <path d="M46 260 L74 260 L70 278 L50 278 Z" fill="#1f2937"/>
+        <path d="M56 260 L64 260 L62 278 L58 278 Z" fill="#0f172a"/>
+      </symbol>
+    </defs>
+  </svg>
   <div class="nebula"></div>
   <canvas id="stars"></canvas>
   <div class="shoot"></div>
@@ -612,7 +635,7 @@
   <div class="planet planet-purple"></div>
   <div class="moon"></div>
   <div class="ufo">🛸<span class="beam"></span></div>
-  <div class="rocket">🚀<span class="flame"></span></div>
+  <div class="rocket"><svg viewBox="0 0 120 300" aria-hidden="true"><use href="#rocketReal"/></svg><span class="flame"></span></div>
   <div class="astronaut">🧑‍🚀</div>
   <div class="satellite">🛰️</div>
 
@@ -637,7 +660,7 @@
     <div class="gate-earth" aria-hidden="true"></div>
     <button class="gate-rocket" id="gateBtn" type="button" aria-label="Luncurkan roket">
       <span class="rocket-body">
-        <span class="rocket-emoji">🚀</span>
+        <span class="rocket-emoji"><svg viewBox="0 0 120 300" aria-hidden="true"><use href="#rocketReal"/></svg></span>
         <span class="rocket-flame"></span>
       </span>
       <span class="smoke-puff s1"></span>
@@ -695,7 +718,7 @@
           </defs>
           <path d="M180 292 C 115 245, 60 255, 78 195 C 96 135, 262 165, 252 105 C 244 55, 150 65, 168 28" fill="none" stroke="url(#ribbonGrad)" stroke-width="6" stroke-linecap="round" pathLength="100"/>
         </svg>
-        <div class="rocket-fly" id="rocketFly">&#128640;</div>
+        <div class="rocket-fly" id="rocketFly"><svg viewBox="0 0 120 300" aria-hidden="true"><use href="#rocketReal"/></svg></div>
         <div class="game-hud" id="gameHud"><span id="gameScore">&#11088; 0</span><span id="gameTime">&#9201; 30</span></div>
         <div class="game-bar"><i id="gameBarFill"></i></div>
         <div class="game-start" id="gameStart">

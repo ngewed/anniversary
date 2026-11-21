@@ -885,12 +885,12 @@
     giftStage.classList.remove('show-start', 'show-over');
     giftStage.classList.add('playing');
     giftHint.textContent = 'Tangkap bintangnya! ⭐♥';
-    spawnTimer = setInterval(spawnItem, 540);
+    spawnTimer = setInterval(spawnItem, 360);
     tickTimer = setInterval(() => {
       timeLeft -= 1;
       gameTimeEl.textContent = '⏱ ' + timeLeft;
       gameBarEl.style.width = (timeLeft / 30 * 100) + '%';
-      if (timeLeft <= 15 && !spedUp) { spedUp = true; clearInterval(spawnTimer); spawnTimer = setInterval(spawnItem, 400); }
+      if (timeLeft <= 15 && !spedUp) { spedUp = true; clearInterval(spawnTimer); spawnTimer = setInterval(spawnItem, 260); }
       if (timeLeft <= 0) endGame();
     }, 1000);
   }

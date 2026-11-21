@@ -706,6 +706,7 @@
             <div>&#10084; Love = +1 poin</div>
             <div>&#129680;&#9728;&#65039;&#128125; Planet, komet &amp; alien = -1 poin</div>
             <div>&#9201; 30 detik &mdash; makin lama makin cepat!</div>
+            <div>&#128260; 3x percobaan per halaman</div>
           </div>
           <button id="gameStartBtn">&#9654; Mulai Main</button>
         </div>
@@ -722,6 +723,8 @@
             </div>
             <div class="prize-result" id="prizeResult"></div>
           </div>
+          <p class="game-small" id="gameAttempts"></p>
+          <button id="gameAgainBtn" type="button">↻ Main lagi</button>
         </div>
         <div class="gift-box" id="giftBox">
           <div class="gift-glow"></div>
@@ -847,7 +850,7 @@
   const gameTier = document.getElementById('gameTier');
   const prizeResult = document.getElementById('prizeResult');
   let giftTimer = null, spawnTimer = null, tickTimer = null;
-  let score = 0, timeLeft = 30, playing = false, spedUp = false, gameLocked = false;
+  let score = 0, timeLeft = 30, playing = false, spedUp = false, gameLocked = false, attempts = 0;
 
   function clearField() { document.querySelectorAll('.game-item').forEach((i) => i.remove()); }
 
@@ -863,16 +866,18 @@
     it.textContent = emoji;
     if (!deco) it.dataset.v = v;
     it.style.left = (8 + Math.random() * 300) + 'px';
-    it.style.fontSize = (26 + Math.random() * 14) + 'px';
+    const size = 26 + Math.random() * 14;
+    it.style.fontSize = (emoji === '♥' ? size * 1.35 : size) + 'px';
     const elapsed = 30 - timeLeft;
-    const baseDur = 2.6 - elapsed * 0.047;
+    const baseDur = 3.0 - elapsed * 0.047;
     it.style.animationDuration = (baseDur + Math.random() * 0.4) + 's';
     it.addEventListener('animationend', () => it.remove());
     giftStage.appendChild(it);
   }
 
   function startGame() {
-    if (gameLocked) return;
+    if (attempts >= 3) return;
+    attempts += 1;
     score = 0; timeLeft = 30; playing = true; spedUp = false;
     gameScoreEl.textContent = '⭐ 0';
     gameTimeEl.textContent = '⏱ 30';
@@ -880,12 +885,12 @@
     giftStage.classList.remove('show-start', 'show-over');
     giftStage.classList.add('playing');
     giftHint.textContent = 'Tangkap bintangnya! ⭐♥';
-    spawnTimer = setInterval(spawnItem, 480);
+    spawnTimer = setInterval(spawnItem, 540);
     tickTimer = setInterval(() => {
       timeLeft -= 1;
       gameTimeEl.textContent = '⏱ ' + timeLeft;
       gameBarEl.style.width = (timeLeft / 30 * 100) + '%';
-      if (timeLeft <= 15 && !spedUp) { spedUp = true; clearInterval(spawnTimer); spawnTimer = setInterval(spawnItem, 340); }
+      if (timeLeft <= 15 && !spedUp) { spedUp = true; clearInterval(spawnTimer); spawnTimer = setInterval(spawnItem, 400); }
       if (timeLeft <= 0) endGame();
     }, 1000);
   }
@@ -909,8 +914,12 @@
       else box.classList.add('locked');
     });
     giftStage.classList.add('show-over');
-    gameLocked = true;
-    giftHint.textContent = 'Skor sudah keluar — refresh halaman untuk main lagi ♥';
+    gameLocked = attempts >= 3;
+    const againBtn = document.getElementById('gameAgainBtn');
+    const attemptsEl = document.getElementById('gameAttempts');
+    if (attemptsEl) attemptsEl.textContent = 'Percobaan ' + attempts + ' dari 3';
+    if (againBtn) againBtn.style.display = attempts < 3 ? '' : 'none';
+    giftHint.textContent = attempts < 3 ? 'Skor sudah keluar — ketuk Main lagi untuk coba lagi ♥' : 'Skor sudah keluar — refresh halaman untuk main lagi ♥';
   }
 
   function catchItem(it) {
@@ -960,6 +969,7 @@
   });
 
   document.getElementById('gameStartBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
+  document.getElementById('gameAgainBtn').addEventListener('click', (e) => { e.stopPropagation(); startGame(); });
   giftStage.addEventListener('contextmenu', (e) => e.preventDefault());
   const PRIZES = {
     1: { title: 'VOUCHER Rp150.000', sub: 'Selamat! Hadiahmu sudah menanti ♥' },
